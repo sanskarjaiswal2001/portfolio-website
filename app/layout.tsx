@@ -13,6 +13,10 @@ export const metadata: Metadata = {
   description:
     "Python Developer with 2.6 years of experience delivering backend systems, automation frameworks, and AI-driven applications.",
   generator: "v0.app",
+  icons: {
+    icon: "/avatar.jpg",
+    shortcut: "/avatar.jpg",
+  },
 }
 
 export default function RootLayout({
@@ -22,6 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
+      <head>
+        <link rel="icon" href="/avatar.jpg" />
+      </head>
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased`}>
         <Navigation />
         <AnimationProvider>
