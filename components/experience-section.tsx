@@ -10,7 +10,7 @@ const experiences = [
     title: "Software Engineer",
     company: "Betsol",
     location: "Bangalore, IN",
-    period: "Jan 2025 -- Present",
+    period: "Jan 2025 - Present",
     technologies: [
       "Python",
       "Django REST Framework",
@@ -33,7 +33,7 @@ const experiences = [
     title: "Associate Software Engineer",
     company: "Betsol",
     location: "Bangalore, IN",
-    period: "Jul 2023 -- Jan 2025",
+    period: "Jul 2023 - Jan 2025",
     technologies: ["Python", "Django", "MongoDB", "Nginx", "RPAFramework", "Docker", "MSSQL", "Git"],
     highlights: [
       "Migrated from BluePrism to a python based in-house platform, saving $1M+ annually",
@@ -120,7 +120,7 @@ export function ExperienceSection() {
                             transition: { type: "spring", damping: 20, stiffness: 400 },
                           }}
                         >
-                          {exp.company} -- {exp.location}
+                          {exp.company} - {exp.location}
                         </motion.p>
                       </div>
                       <div className="mt-2 md:mt-0">
