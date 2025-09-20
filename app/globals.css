@@ -1,0 +1,403 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Updated theme to match dark Apple-like design with deep backgrounds and subtle accents */
+  --background: oklch(0.05 0 0); /* Very dark background #0b0b0b */
+  --foreground: oklch(0.96 0 0); /* Soft white text #f5f5f5 */
+  --card: oklch(0.08 0 0); /* Slightly lighter dark for cards */
+  --card-foreground: oklch(0.96 0 0);
+  --popover: oklch(0.08 0 0);
+  --popover-foreground: oklch(0.96 0 0);
+  --primary: oklch(0.6 0.2 260); /* Purple accent */
+  --primary-foreground: oklch(0.96 0 0);
+  --secondary: oklch(0.12 0 0); /* Dark gray */
+  --secondary-foreground: oklch(0.96 0 0);
+  --muted: oklch(0.12 0 0);
+  --muted-foreground: oklch(0.63 0 0); /* Secondary text #a1a1a1 */
+  --accent: oklch(0.6 0.2 260); /* Purple accent */
+  --accent-foreground: oklch(0.96 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.96 0 0);
+  --border: oklch(0.15 0 0); /* Subtle borders */
+  --input: oklch(0.12 0 0);
+  --ring: oklch(0.6 0.2 260);
+  --chart-1: oklch(0.6 0.2 260);
+  --chart-2: oklch(0.6 0.15 200);
+  --chart-3: oklch(0.6 0.15 300);
+  --chart-4: oklch(0.6 0.15 120);
+  --chart-5: oklch(0.6 0.15 60);
+  --radius: 0.75rem;
+  --sidebar: oklch(0.08 0 0);
+  --sidebar-foreground: oklch(0.96 0 0);
+  --sidebar-primary: oklch(0.6 0.2 260);
+  --sidebar-primary-foreground: oklch(0.96 0 0);
+  --sidebar-accent: oklch(0.12 0 0);
+  --sidebar-accent-foreground: oklch(0.96 0 0);
+  --sidebar-border: oklch(0.15 0 0);
+  --sidebar-ring: oklch(0.6 0.2 260);
+}
+
+.dark {
+  --background: oklch(0.05 0 0);
+  --foreground: oklch(0.96 0 0);
+  --card: oklch(0.08 0 0);
+  --card-foreground: oklch(0.96 0 0);
+  --popover: oklch(0.08 0 0);
+  --popover-foreground: oklch(0.96 0 0);
+  --primary: oklch(0.6 0.2 260);
+  --primary-foreground: oklch(0.96 0 0);
+  --secondary: oklch(0.12 0 0);
+  --secondary-foreground: oklch(0.96 0 0);
+  --muted: oklch(0.12 0 0);
+  --muted-foreground: oklch(0.63 0 0);
+  --accent: oklch(0.6 0.2 260);
+  --accent-foreground: oklch(0.96 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.96 0 0);
+  --border: oklch(0.15 0 0);
+  --input: oklch(0.12 0 0);
+  --ring: oklch(0.6 0.2 260);
+  --chart-1: oklch(0.6 0.2 260);
+  --chart-2: oklch(0.6 0.15 200);
+  --chart-3: oklch(0.6 0.15 300);
+  --chart-4: oklch(0.6 0.15 120);
+  --chart-5: oklch(0.6 0.15 60);
+  --sidebar: oklch(0.08 0 0);
+  --sidebar-foreground: oklch(0.96 0 0);
+  --sidebar-primary: oklch(0.6 0.2 260);
+  --sidebar-primary-foreground: oklch(0.96 0 0);
+  --sidebar-accent: oklch(0.12 0 0);
+  --sidebar-accent-foreground: oklch(0.96 0 0);
+  --sidebar-border: oklch(0.15 0 0);
+  --sidebar-ring: oklch(0.6 0.2 260);
+}
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    /* Solid black base so blobs pop and glass reflects blue tones */
+    background-color: #000000;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Top-right spotlight + vignette using html pseudo-element so it sits above the blob layers but behind content */
+  html::before {
+    content: "";
+    position: fixed;
+    right: -10vw;
+    top: -20vh;
+    width: 80vw;
+    height: 80vh;
+    pointer-events: none;
+    z-index: -0.5; /* sit above blob layers but below page content */
+    background: radial-gradient(closest-side at 80% 10%, rgba(10,40,90,0.9), rgba(10,40,90,0.65) 30%, rgba(6,24,66,0.35) 55%, transparent 70%);
+    filter: blur(40px) saturate(150%);
+    mix-blend-mode: screen;
+    opacity: 0.95;
+  }
+
+  /* Global vignette to darken edges similar to reference */
+  html::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1; /* above blobs but use mix-blend to not block content */
+    background: radial-gradient(60% 60% at 50% 40%, transparent 0%, rgba(0,0,0,0.18) 60%, rgba(0,0,0,0.6) 100%);
+    mix-blend-mode: multiply;
+    opacity: 0.9;
+  }
+
+  /* Layered animated blue blobs using pseudo-elements so glass utilities can pick up the subtle color */
+  body::before,
+  body::after {
+    content: "";
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 120vmax;
+    height: 120vmax;
+    pointer-events: none;
+    z-index: -1; /* behind page content */
+    filter: blur(80px) saturate(160%);
+    mix-blend-mode: screen;
+    opacity: 0.8;
+    transition: opacity 300ms ease;
+  }
+
+  /* Primary blue blob (slow, cool) with extra accents for depth */
+  body::before {
+    background: 
+      /* big soft blobs */
+      radial-gradient(closest-side at 18% 28%, rgba(59,130,246,0.36), rgba(59,130,246,0.18) 25%, transparent 40%),
+      radial-gradient(closest-side at 50% 10%, rgba(59,130,246,0.2), rgba(59,130,246,0.1) 25%, transparent 45%),
+      radial-gradient(closest-side at 80% 70%, rgba(14,165,233,0.26), rgba(14,165,233,0.12) 25%, transparent 40%),
+  /* firefly dots (smaller, sharper) */
+  radial-gradient(circle at 10% 12%, rgba(59,130,246,0.95) 0%, rgba(59,130,246,0.8) 6%, transparent 10%),
+  radial-gradient(circle at 30% 22%, rgba(59,130,246,0.85) 0%, rgba(59,130,246,0.65) 6%, transparent 12%),
+  radial-gradient(circle at 60% 18%, rgba(14,165,233,0.9) 0%, rgba(14,165,233,0.66) 6%, transparent 12%),
+  radial-gradient(circle at 85% 15%, rgba(99,102,241,0.88) 0%, rgba(99,102,241,0.64) 6%, transparent 12%),
+  radial-gradient(circle at 40% 40%, rgba(37,99,235,0.86) 0%, rgba(37,99,235,0.62) 6%, transparent 12%);
+  animation: blobFloatA 9s ease-in-out infinite, firefliesA 5s linear infinite;
+  }
+
+  /* Secondary blue blob (faster, more accents) */
+  body::after {
+    background: 
+      /* big soft blobs */
+      radial-gradient(closest-side at 70% 18%, rgba(99,102,241,0.26), rgba(99,102,241,0.12) 20%, transparent 45%),
+      radial-gradient(closest-side at 30% 80%, rgba(37,99,235,0.22), rgba(37,99,235,0.1) 25%, transparent 50%),
+      radial-gradient(closest-side at 55% 55%, rgba(14,165,233,0.12), rgba(14,165,233,0.06) 30%, transparent 60%),
+  /* firefly dots (smaller) */
+  radial-gradient(circle at 75% 22%, rgba(59,130,246,0.88) 0%, rgba(59,130,246,0.66) 6%, transparent 12%),
+  radial-gradient(circle at 22% 78%, rgba(14,165,233,0.86) 0%, rgba(14,165,233,0.62) 6%, transparent 12%),
+  radial-gradient(circle at 50% 48%, rgba(99,102,241,0.84) 0%, rgba(99,102,241,0.6) 6%, transparent 12%);
+  animation: blobFloatB 7s ease-in-out infinite, firefliesB 4s linear infinite;
+    opacity: 0.8;
+  }
+
+  /* Bring back gradient animation keyframes */
+  @keyframes gradientShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* Blob float keyframes: subtle drifting and scaling */
+  @keyframes blobFloatA {
+    0% {
+      transform: translate(-48%, -52%) scale(1);
+      opacity: 0.7;
+    }
+    50% {
+      transform: translate(-52%, -48%) scale(1.06);
+      opacity: 0.6;
+    }
+    100% {
+      transform: translate(-48%, -52%) scale(1);
+      opacity: 0.7;
+    }
+  }
+
+  @keyframes blobFloatB {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0.55;
+    }
+    50% {
+      transform: translate(-54%, -46%) scale(1.08);
+      opacity: 0.48;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0.55;
+    }
+  }
+
+  /* Firefly motion: animate background-position of each small radial gradient to simulate drifting points */
+  @keyframes firefliesA {
+    0% {
+      background-position: 18% 28%, 50% 10%, 80% 70%, 10% 12%, 30% 22%, 60% 18%, 85% 15%, 40% 40%;
+      opacity: 0.82;
+    }
+    25% {
+      background-position: 16% 32%, 52% 12%, 78% 68%, 12% 18%, 28% 26%, 62% 14%, 88% 12%, 36% 44%;
+      opacity: 0.78;
+    }
+    50% {
+      background-position: 20% 24%, 48% 8%, 82% 72%, 14% 10%, 34% 18%, 58% 22%, 82% 20%, 44% 36%;
+      opacity: 0.86;
+    }
+    75% {
+      background-position: 19% 30%, 53% 14%, 79% 69%, 8% 20%, 26% 30%, 64% 20%, 90% 18%, 38% 46%;
+      opacity: 0.8;
+    }
+    100% {
+      background-position: 18% 28%, 50% 10%, 80% 70%, 10% 12%, 30% 22%, 60% 18%, 85% 15%, 40% 40%;
+      opacity: 0.82;
+    }
+  }
+
+  @keyframes firefliesB {
+    0% {
+      background-position: 70% 18%, 30% 80%, 55% 55%, 75% 22%, 22% 78%, 50% 48%;
+      opacity: 0.78;
+    }
+    25% {
+      background-position: 72% 14%, 28% 84%, 57% 52%, 72% 26%, 24% 74%, 46% 50%;
+      opacity: 0.74;
+    }
+    50% {
+      background-position: 68% 22%, 32% 76%, 53% 58%, 78% 18%, 20% 82%, 54% 44%;
+      opacity: 0.8;
+    }
+    75% {
+      background-position: 71% 16%, 27% 81%, 58% 50%, 76% 24%, 26% 72%, 48% 52%;
+      opacity: 0.76;
+    }
+    100% {
+      background-position: 70% 18%, 30% 80%, 55% 55%, 75% 22%, 22% 78%, 50% 48%;
+      opacity: 0.78;
+    }
+  }
+
+  /* Added smooth scrolling and custom scrollbar */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: oklch(0.08 0 0);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: oklch(0.3 0 0);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: oklch(0.4 0 0);
+  }
+}
+
+/* Added custom animations for fade-in effects */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Enhanced glass effect with better iOS-style backdrop blur */
+.glass-effect {
+  backdrop-filter: blur(20px) saturate(180%);
+  /* Slightly translucent so gradient subtly shows through */
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Added iOS-style liquid glass utilities */
+.liquid-glass {
+  backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.liquid-glass-active {
+  backdrop-filter: blur(20px) saturate(180%);
+  /* Active state: subtle blue tint so the animated gradient reflects in the glass */
+  background: linear-gradient(180deg, rgba(59,130,246,0.06), rgba(255,255,255,0.02));
+  border: 1px solid rgba(59, 130, 246, 0.06);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.55), 0 0 12px rgba(59,130,246,0.04);
+}
+
+/* Enhanced liquid glass effects for cards */
+.liquid-glass-card {
+  backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.liquid-glass-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  /* Subtle sheen with a touch of blue to pick up the animated background */
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, transparent 50%, rgba(59,130,246,0.03) 100%);
+  pointer-events: none;
+}
+
+/* Added subtle zoom effect only for cards */
+.liquid-glass-card:hover {
+  background: rgba(0, 0, 0, 0.25);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transform: scale(1.02);
+}
