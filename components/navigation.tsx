@@ -40,55 +40,62 @@ export function Navigation() {
           : "bg-transparent",
       )}
     >
-      <div className="max-w-6xl mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full overflow-hidden bg-muted">
-              {!imgFailed ? (
-                <Image
-                  src={avatarImg}
-                  alt="Sanskar Jaiswal avatar"
-                  width={40}
-                  height={40}
-                  priority
-                  onError={() => setImgFailed(true)}
-                />
-              ) : (
-                <div
-                  role="img"
-                  aria-label="Sanskar Jaiswal avatar"
-                  className="w-10 h-10 flex items-center justify-center bg-primary text-white font-semibold"
-                >
-                  SJ
-                </div>
-              )}
-            </div>
-            {pathname !== "/" && (
-              <span className="text-xl font-semibold text-foreground hover:text-primary transition-colors">Sanskar Jaiswal</span>
-            )}
-          </Link>
-
-            <div className="hidden md:flex items-center gap-4 p-2 rounded-full bg-transparent backdrop-blur-xl border border-white/10">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={cn(
-                  "text-sm font-medium transition-colors",
-                  pathname === item.href ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+      <div className="max-w-6xl mx-auto px-8 py-5">
+        {/* grid: left avatar, center nav, right mobile actions */}
+        <div className="grid grid-cols-3 items-center">
+          <div className="flex items-center">
+            <Link href="/" className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full overflow-hidden bg-muted">
+                {!imgFailed ? (
+                  <Image
+                    src={avatarImg}
+                    alt="Sanskar Jaiswal avatar"
+                    width={40}
+                    height={40}
+                    priority
+                    onError={() => setImgFailed(true)}
+                  />
+                ) : (
+                  <div
+                    role="img"
+                    aria-label="Sanskar Jaiswal avatar"
+                    className="w-10 h-10 flex items-center justify-center bg-primary text-white font-semibold"
+                  >
+                    SJ
+                  </div>
                 )}
-              >
-                {item.name}
-              </Link>
-            ))}
+              </div>
+              {pathname !== "/" && (
+                <span className="text-xl font-semibold text-foreground hover:text-primary transition-colors">Sanskar Jaiswal</span>
+              )}
+            </Link>
           </div>
 
-          <div className="md:hidden">
-            <button className="p-2 text-foreground/90 hover:text-foreground transition-colors rounded-md">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
+          <div className="flex items-center justify-center">
+            <div className="hidden md:flex items-center gap-6 px-4 py-2 rounded-full bg-transparent backdrop-blur-xl border border-white/8">
+              {navItems.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={cn(
+                    "text-sm font-medium transition-colors",
+                    pathname === item.href ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                  )}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex items-center justify-end">
+            <div className="md:hidden">
+              <button className="p-2 text-foreground/90 hover:text-foreground transition-colors rounded-md">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </div>
