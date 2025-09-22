@@ -49,146 +49,55 @@ export function ExperienceSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
+  // Lightweight entrance animation for the whole section.
+  // Avoid per-item springs and many motion wrappers to reduce CPU/GPU load.
   const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.1,
-      },
-    },
-  } as any
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 60, rotateX: 15 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      rotateX: 0,
-      transition: {
-        type: "spring",
-        damping: 20,
-        stiffness: 300,
-      },
-    },
-  } as any
-
-  const cardVariants = {
-    hover: {
-      y: -2,
-      transition: {
-        type: "spring",
-        damping: 20,
-        stiffness: 400,
-      },
-    },
-    tap: {},
+    hidden: { opacity: 0, y: 8 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
   } as any
 
   return (
     <section className="py-24 px-6 min-h-screen bg-secondary/20" ref={ref}>
       <div className="max-w-6xl mx-auto">
         <motion.div variants={containerVariants} initial="hidden" animate={isInView ? "visible" : "hidden"}>
-          <motion.h2
-            variants={itemVariants}
-            className="text-3xl md:text-4xl font-bold text-foreground mb-16 text-center"
-          >
-            Professional Experience
-          </motion.h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-16 text-center">Professional Experience</h2>
 
           <div className="space-y-8">
             {experiences.map((exp, index) => (
-              <motion.div key={index} variants={itemVariants}>
-                <motion.div variants={cardVariants} whileHover="hover" whileTap="tap">
+              <div key={index}>
+                <div className="transform transition-transform duration-200 hover:-translate-y-1">
                   <Card className="p-8 liquid-glass-card transition-all duration-300">
                     <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-6">
                       <div>
-                        <motion.h3
-                          className="text-2xl font-bold text-foreground mb-2"
-                          whileHover={{
-                            x: 5,
-                            transition: { type: "spring", damping: 20, stiffness: 400 },
-                          }}
-                        >
-                          {exp.title}
-                        </motion.h3>
-                        <motion.p
-                          className="text-lg text-primary font-semibold"
-                          whileHover={{
-                            x: 3,
-                            transition: { type: "spring", damping: 20, stiffness: 400 },
-                          }}
-                        >
-                          {exp.company} - {exp.location}
-                        </motion.p>
+                        <h3 className="text-2xl font-bold text-foreground mb-2">{exp.title}</h3>
+                        <p className="text-lg text-primary font-semibold">{exp.company} - {exp.location}</p>
                       </div>
                       <div className="mt-2 md:mt-0">
                         <span className="text-muted-foreground font-medium">{exp.period}</span>
                       </div>
                     </div>
 
-                    <motion.div
-                      className="flex flex-wrap gap-2 mb-6"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1 + 0.3 }}
-                    >
-                      {exp.technologies.map((tech, techIndex) => (
-                        <motion.div
-                          key={tech}
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{
-                            delay: index * 0.1 + techIndex * 0.03 + 0.4,
-                            type: "spring",
-                            damping: 20,
-                            stiffness: 400,
-                          }}
-                          whileHover={{
-                            transition: { type: "spring", damping: 15, stiffness: 400 },
-                          }}
-                        >
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {exp.technologies.map((tech) => (
+                        <div key={tech}>
                           <Badge variant="secondary" className="bg-secondary/80 text-secondary-foreground">
                             {tech}
                           </Badge>
-                        </motion.div>
+                        </div>
                       ))}
-                    </motion.div>
+                    </div>
 
                     <ul className="space-y-3">
                       {exp.highlights.map((highlight, idx) => (
-                        <motion.li
-                          key={idx}
-                          className="text-muted-foreground leading-relaxed flex items-start"
-                          initial={{ opacity: 0, x: -30 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{
-                            delay: index * 0.1 + idx * 0.05 + 0.5,
-                            type: "spring",
-                            damping: 20,
-                            stiffness: 300,
-                          }}
-                          whileHover={{
-                            x: 5,
-                            transition: { type: "spring", damping: 20, stiffness: 400 },
-                          }}
-                        >
-                          <motion.span
-                            className="text-primary mr-3 mt-2"
-                            whileHover={{
-                              transition: { type: "spring", damping: 15, stiffness: 400 },
-                            }}
-                          >
-                            •
-                          </motion.span>
+                        <li key={idx} className="text-muted-foreground leading-relaxed flex items-start">
+                          <span className="text-primary mr-3 mt-2">•</span>
                           <span>{highlight}</span>
-                        </motion.li>
+                        </li>
                       ))}
                     </ul>
                   </Card>
-                </motion.div>
-              </motion.div>
+                </div>
+              </div>
             ))}
           </div>
         </motion.div>
