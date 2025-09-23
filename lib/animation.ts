@@ -1,20 +1,19 @@
 // Centralized animation variants & transitions used across the app
-// Keep shapes loose (any) to avoid strict typing friction for motion props
-export type VariantsLike = Record<string, unknown>
+import type { Variants, Transition } from "framer-motion"
 
-export const pageVariants: VariantsLike = {
+export const pageVariants: Variants = {
   initial: { opacity: 0, y: 18, scale: 0.98, filter: "blur(6px)" },
   in: { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" },
   out: { opacity: 0, y: -18, scale: 1.02, filter: "blur(6px)" },
 }
 
-export const pageTransition: VariantsLike = {
+export const pageTransition: Transition = {
   type: "tween",
   duration: 0.45,
   ease: "easeOut",
 }
 
-export const containerVariants: VariantsLike = {
+export const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -22,7 +21,7 @@ export const containerVariants: VariantsLike = {
   },
 }
 
-export const itemVariants: VariantsLike = {
+export const itemVariants: Variants = {
   hidden: { opacity: 0, y: 40, scale: 0.9 },
   visible: {
     opacity: 1,
@@ -32,7 +31,7 @@ export const itemVariants: VariantsLike = {
   },
 }
 
-export const cardHoverVariants: VariantsLike = {
+export const cardHoverVariants: Variants = {
   hover: {
   y: -6,
   rotateX: 2,
@@ -43,7 +42,7 @@ export const cardHoverVariants: VariantsLike = {
   tap: { scale: 0.98 },
 }
 
-export const magneticVariants: VariantsLike = {
+export const magneticVariants: Variants = {
   hover: {
   scale: 1.08,
   rotate: 0,
@@ -52,4 +51,4 @@ export const magneticVariants: VariantsLike = {
   tap: { scale: 0.9 },
 }
 
-export const badgeSpring: VariantsLike = { type: "tween", duration: 0.18 }
+export const badgeSpring: Transition = { type: "tween", duration: 0.18 }
