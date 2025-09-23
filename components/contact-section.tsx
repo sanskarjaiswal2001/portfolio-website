@@ -13,6 +13,7 @@ import { useRef } from "react"
 export function ContactSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
+  /* eslint-disable @typescript-eslint/no-explicit-any */
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -88,14 +89,14 @@ export function ContactSection() {
                 transition: { type: "spring", damping: 20, stiffness: 300 },
               }}
             >
-              Let's Work Together
+              Let&apos;s Work Together
             </motion.h2>
             <motion.p
               className="text-lg text-muted-foreground max-w-2xl mx-auto"
               whileHover={{ scale: 1.01 }}
               transition={{ type: "spring", damping: 20, stiffness: 300 }}
             >
-              I'm always interested in discussing new opportunities, innovative projects, or just having a conversation
+              I&apos;m always interested in discussing new opportunities, innovative projects, or just having a conversation
               about technology and software engineering.
             </motion.p>
           </motion.div>

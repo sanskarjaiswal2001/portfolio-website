@@ -1,5 +1,8 @@
 "use client"
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+"use client"
 import { motion, useInView, useScroll, useTransform } from "framer-motion"
 import { useRef } from "react"
 
@@ -66,7 +69,7 @@ export function AboutSection() {
 
           <motion.div variants={itemVariants} className="prose prose-lg prose-invert max-w-none">
             <motion.p className="text-lg text-muted-foreground leading-relaxed mb-8 text-center">
-              I'm a passionate{" "}
+              I&apos;m a passionate{" "}
               <motion.span
                 className="text-primary font-semibold"
                 whileHover={{

@@ -2,8 +2,9 @@
 
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
+import { motion, useInView, type Variants } from "framer-motion"
+import { useRef, useEffect, useState } from "react"
+import { usePerf } from "@/components/perf-provider"
 
 const experiences = [
   {
@@ -49,58 +50,120 @@ export function ExperienceSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
+  const { lowPower } = usePerf()
+  const [prefersReduced, setPrefersReduced] = useState(false)
+
+  useEffect(() => {
+    try {
+      const mq = window.matchMedia("(prefers-reduced-motion: reduce)")
+      setPrefersReduced(mq.matches)
+      const handler = (e: MediaQueryListEvent) => setPrefersReduced(e.matches)
+      if (mq.addEventListener) mq.addEventListener("change", handler)
+      else mq.addListener(handler)
+      return () => {
+        if (mq.removeEventListener) mq.removeEventListener("change", handler)
+        else mq.removeListener(handler)
+      }
+    } catch (e) {
+      setPrefersReduced(false)
+    }
+  }, [])
+
+  const enableMotion = !lowPower && !prefersReduced
+
   // Lightweight entrance animation for the whole section.
   // Avoid per-item springs and many motion wrappers to reduce CPU/GPU load.
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0, y: 8 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
-  } as any
+  }
 
   return (
     <section className="py-24 px-6 min-h-screen bg-secondary/20" ref={ref}>
       <div className="max-w-6xl mx-auto">
-        <motion.div variants={containerVariants} initial="hidden" animate={isInView ? "visible" : "hidden"}>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-16 text-center">Professional Experience</h2>
+        {enableMotion ? (
+          <motion.div variants={containerVariants} initial="hidden" animate={isInView ? "visible" : "hidden"}>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-16 text-center">Professional Experience</h2>
 
-          <div className="space-y-8">
-            {experiences.map((exp, index) => (
-              <div key={index}>
-                <div className="transform transition-transform duration-200 hover:-translate-y-1">
-                  <Card className="p-8 liquid-glass-card transition-all duration-300">
-                    <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-6">
-                      <div>
-                        <h3 className="text-2xl font-bold text-foreground mb-2">{exp.title}</h3>
-                        <p className="text-lg text-primary font-semibold">{exp.company} - {exp.location}</p>
+            <div className="space-y-8">
+              {experiences.map((exp, index) => (
+                <div key={index}>
+                  <div className="transform transition-transform duration-200 hover:-translate-y-1">
+                    <Card className="p-8 liquid-glass-card transition-all duration-300">
+                      <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-6">
+                        <div>
+                          <h3 className="text-2xl font-bold text-foreground mb-2">{exp.title}</h3>
+                          <p className="text-lg text-primary font-semibold">{exp.company} - {exp.location}</p>
+                        </div>
+                        <div className="mt-2 md:mt-0">
+                          <span className="text-muted-foreground font-medium">{exp.period}</span>
+                        </div>
                       </div>
-                      <div className="mt-2 md:mt-0">
+
+                      <div className="flex flex-wrap gap-2 mb-6">
+                        {exp.technologies.map((tech) => (
+                          <div key={tech}>
+                            <Badge variant="secondary" className="bg-secondary/80 text-secondary-foreground">
+                              {tech}
+                            </Badge>
+                          </div>
+                        ))}
+                      </div>
+
+                      <ul className="space-y-3">
+                        {exp.highlights.map((highlight, idx) => (
+                          <li key={idx} className="text-muted-foreground leading-relaxed flex items-start">
+                            <span className="text-primary mr-3 mt-2">•</span>
+                            <span>{highlight}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </Card>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        ) : (
+          /* Low-power / reduced-motion fallback: static, non-animated content */
+          <div>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-12 text-center">Professional Experience</h2>
+
+            <div className="space-y-6">
+              {experiences.map((exp, index) => (
+                <div key={index}>
+                  <Card className="p-6 bg-secondary/30">
+                    <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
+                      <div>
+                        <h3 className="text-xl font-bold text-foreground mb-1">{exp.title}</h3>
+                        <p className="text-base text-primary font-semibold">{exp.company} - {exp.location}</p>
+                      </div>
+                      <div className="mt-1 md:mt-0">
                         <span className="text-muted-foreground font-medium">{exp.period}</span>
                       </div>
                     </div>
 
-                    <div className="flex flex-wrap gap-2 mb-6">
+                    <div className="flex flex-wrap gap-2 mb-4">
                       {exp.technologies.map((tech) => (
-                        <div key={tech}>
-                          <Badge variant="secondary" className="bg-secondary/80 text-secondary-foreground">
-                            {tech}
-                          </Badge>
-                        </div>
+                        <Badge key={tech} variant="secondary" className="bg-secondary/80 text-secondary-foreground">
+                          {tech}
+                        </Badge>
                       ))}
                     </div>
 
-                    <ul className="space-y-3">
+                    <ul className="space-y-2">
                       {exp.highlights.map((highlight, idx) => (
-                        <li key={idx} className="text-muted-foreground leading-relaxed flex items-start">
-                          <span className="text-primary mr-3 mt-2">•</span>
-                          <span>{highlight}</span>
+                        <li key={idx} className="text-muted-foreground leading-relaxed">
+                          • {highlight}
                         </li>
                       ))}
                     </ul>
                   </Card>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </motion.div>
+        )}
       </div>
     </section>
   )

@@ -401,3 +401,59 @@
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   transform: scale(1.02);
 }
+
+/* Low-power mode: drastically reduce animations, blurs and decorative layers */
+.low-power body::before,
+.low-power body::after,
+.low-power html::before,
+.low-power html::after {
+  animation: none !important;
+  transition: none !important;
+  filter: none !important;
+  opacity: 0 !important;
+  display: none !important;
+}
+
+.low-power * {
+  animation: none !important;
+  transition: none !important;
+  will-change: auto !important;
+  transform: none !important;
+}
+
+/* Remove heavy backdrop blurs and glass effects */
+.low-power .glass-effect,
+.low-power .liquid-glass,
+.low-power .liquid-glass-card {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: rgba(0,0,0,0.6) !important; /* simple dark card */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.5) !important;
+  border: 1px solid rgba(255,255,255,0.02) !important;
+}
+
+/* Simplify page visuals */
+.low-power body {
+  background-color: #000 !important;
+}
+
+/* Reduce image decoding and prefer low-quality placeholders */
+.low-power img {
+  image-rendering: -webkit-optimize-contrast; /* hint to reduce smoothing */
+  image-rendering: crisp-edges;
+  filter: none !important;
+}
+
+/* Disable heavy shadows and outlines */
+.low-power .shadow,
+.low-power [class*="shadow-"] {
+  box-shadow: none !important;
+}
+
+/* Honor prefers-reduced-motion more aggressively */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

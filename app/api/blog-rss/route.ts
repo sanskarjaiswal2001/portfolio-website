@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react/no-unescaped-entities */
+
 import { NextResponse } from "next/server"
 import { XMLParser } from "fast-xml-parser"
 

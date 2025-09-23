@@ -5,6 +5,7 @@ import { GeistMono } from "geist/font/mono"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
 import { AnimationProvider } from "@/components/animation-provider"
+import { PerfProvider } from "@/components/perf-provider"
 import { Navigation } from "@/components/navigation"
 import "./globals.css"
 
@@ -31,9 +32,11 @@ export default function RootLayout({
       </head>
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased`}>
         <Navigation />
-        <AnimationProvider>
-          <Suspense fallback={null}>{children}</Suspense>
-        </AnimationProvider>
+        <PerfProvider>
+          <AnimationProvider>
+            <Suspense fallback={null}>{children}</Suspense>
+          </AnimationProvider>
+        </PerfProvider>
         <Analytics />
       </body>
     </html>
