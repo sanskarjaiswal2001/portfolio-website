@@ -3,6 +3,7 @@
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { motion, useInView, type Variants } from "framer-motion"
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { useRef, useEffect, useState } from "react"
 import { usePerf } from "@/components/perf-provider"
 
