@@ -1,230 +1,231 @@
 "use client"
 
-import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { ExternalLink, Github } from "lucide-react"
-import { motion, useInView } from "framer-motion"
-import { usePerf } from "@/components/perf-provider"
-import { useEffect, useState } from "react"
-import { containerVariants as sharedContainer, itemVariants as sharedItem, cardHoverVariants as sharedCardHover, badgeSpring } from "@/lib/animation"
-import Image from "next/image"
+import { Github } from "lucide-react"
+import { motion, useScroll, useTransform, useInView } from "framer-motion"
 import { useRef } from "react"
-
-import guardianImg from "../assets/guardian-modified.png"
-import ragImg from "../assets/RAG-pipeline.png"
-import automationImg from "../assets/automation-platform.png"
-import monitoringImg from "../assets/monitoring-system.png"
+import { ArchitectureDiagram } from "@/components/architecture-diagram"
+import { ProjectVisual } from "@/components/project-visual"
 
 const projects = [
   {
     title: "Guardian Modified",
-    description:
-      "Implemented token-based access control in GTA V P2P network for 1,000+ users. Ready to deploy on GCP Cloud Functions with Firebase integration.",
+    tagline: "Token-based access control for P2P networks",
+    problem: "GTA V P2P networks lacked proper access control, leaving 1,000+ users vulnerable to unauthorized sessions.",
     technologies: ["Python", "Firebase", "GCP", "Network Security"],
     github: "https://github.com/sanskarjaiswal2001/guardian-modified",
-    image: guardianImg,
+    visualType: "guardian" as const,
+    impact: "1,000+ users secured",
+    architecture: [
+      { label: "Client" },
+      { label: "Token Auth" },
+      { label: "Firebase" },
+      { label: "GCP Functions" },
+      { label: "P2P Network" },
+    ],
   },
   {
     title: "RAG Pipeline System",
-    description:
-      "Scalable RAG pipeline using Azure OpenAI and FastMCP, achieving sub-2s query responses on 3M+ records. Built for enterprise-scale knowledge retrieval.",
+    tagline: "Enterprise-scale knowledge retrieval",
+    problem: "Manual escalation of support queries on 3M+ records was slow and costly, with high response times.",
     technologies: ["Python", "Azure OpenAI", "FastMCP", "LangChain"],
-    image: ragImg,
+    visualType: "rag" as const,
+    impact: "Sub-2s on 3M+ records",
+    architecture: [
+      { label: "Documents" },
+      { label: "Embeddings" },
+      { label: "Vector DB" },
+      { label: "LLM" },
+      { label: "Response" },
+    ],
   },
   {
     title: "Automation Platform",
-    description:
-      "Python-based automation platform replacing BluePrism, saving $1M+ annually. Includes 50+ automations across 11+ enterprise clients.",
+    tagline: "Enterprise RPA replacement saving $1M+/yr",
+    problem: "BluePrism licensing costs exceeded $1M annually while limiting automation flexibility across 11+ clients.",
     technologies: ["Python", "Django", "MongoDB", "Docker"],
-    image: automationImg,
+    visualType: "automation" as const,
+    impact: "$1M+ saved annually",
+    architecture: [
+      { label: "Scheduler" },
+      { label: "Django API" },
+      { label: "Worker Pool" },
+      { label: "MongoDB" },
+      { label: "Reports" },
+    ],
   },
   {
     title: "Monitoring System",
-    description:
-      "Real-time monitoring tool for 100+ websites with Python-integrated React+Grafana dashboard. Reduced downtime by 80% and saves $40,000/month.",
+    tagline: "Real-time uptime monitoring for 100+ sites",
+    problem: "Legacy monitoring tool missed outages and lacked real-time visibility across 100+ global websites.",
     technologies: ["Python", "React", "Grafana", "Prometheus"],
-    image: monitoringImg,
+    visualType: "monitoring" as const,
+    impact: "80% less downtime",
+    architecture: [
+      { label: "Websites" },
+      { label: "Python Agent" },
+      { label: "Prometheus" },
+      { label: "Grafana" },
+      { label: "Alerts" },
+    ],
   },
 ]
 
-export function ProjectsSection() {
+function ProjectSlide({ project, index }: { project: typeof projects[number]; index: number }) {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
-
-  const { lowPower } = usePerf()
-  const [prefersReduced, setPrefersReduced] = useState(false)
-
-  useEffect(() => {
-    try {
-      const mq = window.matchMedia("(prefers-reduced-motion: reduce)")
-      setPrefersReduced(mq.matches)
-      const handler = (e: MediaQueryListEvent) => setPrefersReduced(e.matches)
-      if (mq.addEventListener) mq.addEventListener("change", handler)
-      else mq.addListener(handler)
-      return () => {
-        if (mq.removeEventListener) mq.removeEventListener("change", handler)
-        else mq.removeListener(handler)
-      }
-    } catch (e) {
-      setPrefersReduced(false)
-    }
-  }, [])
-
-  const enableMotion = !lowPower && !prefersReduced
-
-  const containerVariants = sharedContainer
-  const itemVariants = sharedItem
-  const cardHoverVariants = sharedCardHover
+  const isInView = useInView(ref, { once: true, margin: "-50px" })
 
   return (
-    <section className="py-24 px-6 min-h-screen" ref={ref}>
-      <div className="max-w-6xl mx-auto">
-        {enableMotion ? (
-          <motion.div variants={containerVariants} initial="hidden" animate={isInView ? "visible" : "hidden"}>
-            <motion.h2
-              variants={itemVariants}
-              className="text-3xl md:text-4xl font-bold text-foreground mb-16 text-center"
-            >
-              Featured Projects
-            </motion.h2>
+    <motion.div
+      ref={ref}
+      className="flex-shrink-0 w-[85vw] md:w-[70vw] lg:w-[60vw] h-full snap-center"
+      initial={{ opacity: 0, y: 20 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={{ duration: 0.4, delay: index * 0.05 }}
+    >
+      <div className="bento-tile ctos-bracket h-full flex flex-col md:flex-row overflow-hidden">
+        {/* ctOS data panel visual */}
+        <div className="w-full md:w-[40%] shrink-0">
+          <ProjectVisual type={project.visualType} className="h-full min-h-[200px]" />
+        </div>
 
-            <div className="grid md:grid-cols-2 gap-8">
-              {projects.map((project, index) => (
-                <motion.div key={index} variants={itemVariants}>
-                  <motion.div
-                    variants={cardHoverVariants}
-                    whileHover="hover"
-                    whileTap="tap"
-                    style={{ perspective: 1000 }}
-                  >
-                    <Card className="group overflow-hidden liquid-glass-card hover:bg-card/70 transition-all duration-300 h-full pt-0 min-h-[380px] md:min-h-[420px] flex flex-col">
-                      <div className="rounded-t-xl overflow-hidden">
-                        <motion.div
-                          className="aspect-video relative flex-shrink-0"
-                          whileHover={{
-                            scale: 1.03,
-                            transition: { type: "spring", damping: 20, stiffness: 300 },
-                          }}
-                        >
-                          <Image
-                            src={project.image}
-                            alt={project.title}
-                            fill
-                            className="object-cover transform transition-transform duration-300 group-hover:scale-105"
-                          />
-                          <motion.div
-                            className="absolute inset-0 bg-primary/10"
-                            initial={{ opacity: 0 }}
-                            whileHover={{ opacity: 1 }}
-                            transition={{ duration: 0.3 }}
-                          />
-                        </motion.div>
-                      </div>
-
-                      <div className="pt-6 px-6 pb-6 flex-1 overflow-hidden">
-                        <motion.h3
-                          className="text-xl font-bold text-foreground mb-3"
-                          whileHover={{
-                            x: 5,
-                            transition: { type: "spring", damping: 20, stiffness: 400 },
-                          }}
-                        >
-                          {project.title}
-                        </motion.h3>
-                        <p className="text-muted-foreground leading-relaxed mb-4 line-clamp-5">{project.description}</p>
-
-                        <motion.div className="flex flex-wrap gap-2 mb-6" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 + 0.3 }}>
-                          {project.technologies.map((tech, techIndex) => (
-                            <motion.div
-                              key={tech}
-                              initial={{ opacity: 0, scale: 0.8 }}
-                              animate={{ opacity: 1, scale: 1 }}
-                              transition={{ delay: index * 0.1 + techIndex * 0.05 + 0.4, ...badgeSpring }}
-                              whileHover={{
-                                scale: 1.1,
-                                y: -2,
-                                transition: { type: "spring", damping: 15, stiffness: 400 },
-                              }}
-                            >
-                              <Badge variant="outline" className="border-border/50">
-                                {tech}
-                              </Badge>
-                            </motion.div>
-                          ))}
-                        </motion.div>
-
-                        <motion.div
-                          className="flex gap-3"
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: index * 0.1 + 0.5 }}
-                        >
-                          {project.github && (
-                            <motion.div
-                              whileHover={{ scale: 1.05, y: -2 }}
-                              whileTap={{ scale: 0.95 }}
-                              transition={{ type: "spring", damping: 20, stiffness: 400 }}
-                            >
-                              <Button variant="outline" size="sm" asChild>
-                                <a href={project.github} target="_blank" rel="noopener noreferrer">
-                                  <Github className="w-4 h-4 mr-2" />
-                                  Code
-                                </a>
-                              </Button>
-                            </motion.div>
-                          )}
-                        </motion.div>
-                      </div>
-                    </Card>
-                  </motion.div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        ) : (
+        {/* Content — case study format */}
+        <div className="flex-1 p-5 md:p-7 flex flex-col justify-between">
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-16 text-center">Featured Projects</h2>
+            <div className="flex items-center gap-3 mb-3">
+              <span className="font-mono text-xs text-[#3092FF]/40">0{index + 1}</span>
+              <span className="ctos-tag text-[10px]">
+                {project.impact}
+              </span>
+            </div>
 
-            <div className="grid md:grid-cols-2 gap-8">
-              {projects.map((project, index) => (
-                <div key={index}>
-                  <Card className="group overflow-hidden bg-secondary/30 h-full pt-0 min-h-[300px] flex flex-col">
-                    <div className="rounded-t-xl overflow-hidden">
-                      <div className="aspect-video relative flex-shrink-0">
-                        <Image src={project.image} alt={project.title} fill className="object-cover" />
-                      </div>
-                    </div>
+            <h3 className="text-lg md:text-xl font-heading font-bold text-foreground mb-1 uppercase tracking-wide">
+              {project.title}
+            </h3>
+            <p className="text-xs text-muted-foreground/50 font-mono italic mb-4">{project.tagline}</p>
 
-                    <div className="pt-6 px-6 pb-6 flex-1 overflow-hidden">
-                      <h3 className="text-xl font-bold text-foreground mb-3">{project.title}</h3>
-                      <p className="text-muted-foreground leading-relaxed mb-4 line-clamp-5">{project.description}</p>
-                      <div className="flex flex-wrap gap-2 mb-6">
-                        {project.technologies.map((tech) => (
-                          <Badge key={tech} variant="outline" className="border-border/50">
-                            {tech}
-                          </Badge>
-                        ))}
-                      </div>
+            {/* Problem */}
+            <div className="mb-4">
+              <p className="text-[10px] font-mono text-[#FF6A00]/50 uppercase tracking-wider mb-1">{"// Problem"}</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">{project.problem}</p>
+            </div>
 
-                      <div className="flex gap-3">
-                        {project.github && (
-                          <Button variant="outline" size="sm" asChild>
-                            <a href={project.github} target="_blank" rel="noopener noreferrer">
-                              <Github className="w-4 h-4 mr-2" />
-                              Code
-                            </a>
-                          </Button>
-                        )}
-                      </div>
-                    </div>
-                  </Card>
-                </div>
-              ))}
+            {/* Architecture */}
+            <div className="mb-4">
+              <p className="text-[10px] font-mono text-[#00E5FF]/50 uppercase tracking-wider mb-1">{"// Architecture"}</p>
+              <ArchitectureDiagram steps={project.architecture} />
             </div>
           </div>
-        )}
+
+          <div>
+            <div className="flex flex-wrap gap-1.5 mb-4">
+              {project.technologies.map((tech) => (
+                <Badge key={tech} variant="outline" className="border-[#3092FF]/15 text-[#3092FF]/70 text-[10px] font-mono rounded-none px-2 py-0.5">
+                  {tech}
+                </Badge>
+              ))}
+            </div>
+
+            {project.github && (
+              <Button variant="outline" size="sm" asChild className="font-mono text-xs rounded-none border-[#3092FF]/20 hover:bg-[#3092FF]/5 hover:text-[#3092FF] hover:border-[#3092FF]/40">
+                <a href={project.github} target="_blank" rel="noopener noreferrer">
+                  <Github className="w-3.5 h-3.5 mr-2" />
+                  view_source
+                </a>
+              </Button>
+            )}
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  )
+}
+
+export function ProjectsSection() {
+  const sectionRef = useRef<HTMLElement>(null)
+  const titleRef = useRef(null)
+  const titleInView = useInView(titleRef, { once: true })
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end end"],
+  })
+
+  const x = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["0%", `-${(projects.length - 1) * 75}%`]
+  )
+
+  return (
+    <section
+      id="projects"
+      ref={sectionRef}
+      className="relative"
+      style={{ height: `${(projects.length + 1) * 100}vh` }}
+    >
+      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
+        <div className="px-6 mb-8">
+          <span className="section-label">03 — Projects</span>
+          <motion.h2
+            ref={titleRef}
+            className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground tracking-tight uppercase"
+            initial={{ opacity: 0, y: 20 }}
+            animate={titleInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.5 }}
+          >
+            Featured<span className="text-[#3092FF]">_</span>Work
+          </motion.h2>
+        </div>
+
+        {/* Scrolling track */}
+        <motion.div
+          className="flex gap-6 px-6 items-stretch"
+          style={{ x }}
+        >
+          <div className="flex-shrink-0 w-[10vw]" />
+          {projects.map((project, index) => (
+            <ProjectSlide key={index} project={project} index={index} />
+          ))}
+          <div className="flex-shrink-0 w-[10vw]" />
+        </motion.div>
+
+        {/* Progress dots */}
+        <div className="flex justify-center gap-2 mt-6">
+          {projects.map((_, i) => (
+            <ProgressDot key={i} index={i} scrollYProgress={scrollYProgress} total={projects.length} />
+          ))}
+        </div>
       </div>
     </section>
+  )
+}
+
+function ProgressDot({
+  index,
+  scrollYProgress,
+  total,
+}: {
+  index: number
+  scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"]
+  total: number
+}) {
+  const opacity = useTransform(
+    scrollYProgress,
+    [index / total, (index + 0.5) / total, (index + 1) / total],
+    [0.3, 1, 0.3]
+  )
+  const scale = useTransform(
+    scrollYProgress,
+    [index / total, (index + 0.5) / total, (index + 1) / total],
+    [1, 1.5, 1]
+  )
+
+  return (
+    <motion.div
+      className="w-2 h-2 bg-[#3092FF]"
+      style={{ opacity, scale }}
+    />
   )
 }

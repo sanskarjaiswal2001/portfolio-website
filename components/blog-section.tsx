@@ -1,11 +1,11 @@
 "use client"
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { useEffect, useRef, useState } from "react"
-import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { ExternalLink, Calendar } from "lucide-react"
+import { ExternalLink, Calendar, Terminal } from "lucide-react"
+import { motion, useInView } from "framer-motion"
+import { containerVariants, itemVariants } from "@/lib/animation"
+import { SectionReveal } from "@/components/section-reveal"
 
 interface BlogPost {
   title: string
@@ -15,46 +15,60 @@ interface BlogPost {
   category?: string
 }
 
+const fallbackPosts: BlogPost[] = [
+  {
+    title: "Building Scalable RAG Pipelines with Azure OpenAI",
+    excerpt:
+      "Learn how to architect and deploy production-ready RAG systems that can handle millions of records with sub-second response times.",
+    date: "2025-01-15",
+    link: "https://blog.sanskarjaiswal.dev",
+    category: "AI/ML",
+  },
+  {
+    title: "Python Automation: From BluePrism to Custom Solutions",
+    excerpt:
+      "A deep dive into migrating enterprise automation platforms and the lessons learned from saving $1M+ annually.",
+    date: "2024-12-20",
+    link: "https://blog.sanskarjaiswal.dev",
+    category: "Automation",
+  },
+  {
+    title: "Monitoring 100+ Websites with Python and Grafana",
+    excerpt:
+      "How I built a real-time monitoring system that reduced downtime by 80% and replaced a legacy tool saving $40K/month.",
+    date: "2024-11-10",
+    link: "https://blog.sanskarjaiswal.dev",
+    category: "DevOps",
+  },
+]
+
 export function BlogSection() {
-  const [isVisible, setIsVisible] = useState(false)
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([])
   const [loading, setLoading] = useState(true)
-  const sectionRef = useRef<HTMLElement>(null)
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: "-80px" })
 
   useEffect(() => {
     const fetchBlogPosts = async () => {
       try {
         const response = await fetch("/api/blog-rss")
-          if (response.ok) {
-          const posts = await response.json()
-          // sanitize: ensure hashtags are removed from excerpt and category as a final safety
-          const clean = posts.map((p: any) => ({
-            ...p,
-            excerpt: (p.excerpt || "").replace(/#\w+/g, "").trim(),
-            category: p.category ? String(p.category).replace(/#\w+/g, "").trim() : p.category,
-          }))
-          setBlogPosts(clean.slice(0, 4)) // Show only latest 4 posts
+        if (response.ok) {
+          const data = await response.json()
+          if (Array.isArray(data) && data.length > 0) {
+            const clean = data.map((p: BlogPost) => ({
+              ...p,
+              excerpt: (p.excerpt || "").replace(/#\w+/g, "").trim(),
+              category: p.category ? String(p.category).replace(/#\w+/g, "").trim() : p.category,
+            }))
+            setBlogPosts(clean.slice(0, 4))
+          } else {
+            setBlogPosts(fallbackPosts)
+          }
+        } else {
+          setBlogPosts(fallbackPosts)
         }
-      } catch (error) {
-        console.error("Failed to fetch blog posts:", error)
-        setBlogPosts([
-          {
-            title: "Building Scalable RAG Pipelines with Azure OpenAI",
-            excerpt:
-              "Learn how to architect and deploy production-ready RAG systems that can handle millions of records with sub-second response times.",
-            date: "2025-01-15",
-            link: "https://blog.sanskarjaiswal.dev",
-            category: "AI/ML",
-          },
-          {
-            title: "Python Automation: From BluePrism to Custom Solutions",
-            excerpt:
-              "A deep dive into migrating enterprise automation platforms and the lessons learned from saving $1M+ annually.",
-            date: "2024-12-20",
-            link: "https://blog.sanskarjaiswal.dev",
-            category: "Automation",
-          },
-        ])
+      } catch {
+        setBlogPosts(fallbackPosts)
       } finally {
         setLoading(false)
       }
@@ -63,84 +77,89 @@ export function BlogSection() {
     fetchBlogPosts()
   }, [])
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-        }
-      },
-      { threshold: 0.2 },
-    )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [])
-
   return (
-    <section id="blog" ref={sectionRef} className="py-24 px-6 bg-secondary/20">
-      <div className="max-w-6xl mx-auto">
-        <div className={`transition-all duration-800 ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}>
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Latest Writing</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Thoughts on software engineering, AI, automation, and building scalable systems.
+    <section id="blog" ref={ref} className="py-32 md:py-40 px-6">
+      <SectionReveal className="max-w-5xl mx-auto">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
+          <motion.div variants={itemVariants} className="mb-14">
+            <span className="section-label">04 — Blog</span>
+            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground tracking-tight mb-3 uppercase">
+              Latest<span className="text-[#3092FF]">_</span>Writing
+            </h2>
+            <p className="text-muted-foreground font-mono text-sm max-w-lg">
+              <span className="text-[#3092FF]">&gt;</span> Thoughts on AI, automation, and backend systems
             </p>
-          </div>
+          </motion.div>
 
           {loading ? (
-            <div className="text-center py-12">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
-              <p className="text-muted-foreground mt-4">Loading latest posts...</p>
+            <div className="py-12 font-mono text-sm text-muted-foreground">
+              <span className="text-[#3092FF]">$</span> fetching posts<span className="terminal-cursor ml-1" />
             </div>
           ) : (
             <>
-              <div className="grid md:grid-cols-2 gap-6 mb-12 items-stretch">
+              <div className="space-y-3 mb-10">
                 {blogPosts.map((post, index) => (
-                  <a key={index} href={post.link} target="_blank" rel="noopener noreferrer" className="group block h-full">
-                    <Card className="group p-6 bg-card/50 backdrop-blur-sm border-border/50 hover:bg-card/70 transition-all duration-300 liquid-glass-card h-full flex flex-col">
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
-                      <Calendar className="w-4 h-4" />
-                      <span>
-                        {new Date(post.date).toLocaleDateString("en-US", {
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric",
-                        })}
-                      </span>
-                      {/* category/tags intentionally removed per request */}
+                  <motion.a
+                    key={index}
+                    href={post.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block scan-hover"
+                    variants={itemVariants}
+                  >
+                    <div className="bento-tile p-5 flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
+                      {/* Index + icon */}
+                      <div className="flex items-center gap-3 shrink-0">
+                        <span className="font-mono text-xs text-[#3092FF]/50">0{index + 1}</span>
+                        <Terminal className="w-4 h-4 text-[#3092FF]/30" />
+                      </div>
+
+                      {/* Content */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-3 mb-1">
+                          {post.category && (
+                            <span className="ctos-tag text-[10px]">
+                              {post.category}
+                            </span>
+                          )}
+                          <span className="text-xs font-mono text-muted-foreground/50 flex items-center gap-1">
+                            <Calendar className="w-3 h-3" />
+                            {new Date(post.date).toLocaleDateString("en-US", {
+                              year: "numeric",
+                              month: "short",
+                              day: "numeric",
+                            })}
+                          </span>
+                        </div>
+                        <h3 className="font-mono text-sm font-bold text-foreground group-hover:text-[#3092FF] transition-colors truncate">
+                          {post.title}
+                        </h3>
+                        <p className="text-sm text-muted-foreground/70 mt-1 line-clamp-1 hidden md:block">{post.excerpt}</p>
+                      </div>
+
+                      {/* Arrow */}
+                      <ExternalLink className="w-4 h-4 text-muted-foreground/30 group-hover:text-[#3092FF] transition-colors shrink-0" />
                     </div>
-
-                    <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-accent transition-colors">
-                      {post.title}
-                    </h3>
-
-                    <p className="text-muted-foreground leading-relaxed mb-4">{post.excerpt}</p>
-
-                    <div className="mt-auto text-sm">
-                      <span className="text-muted-foreground">Read full post</span>
-                      <ExternalLink className="w-4 h-4 ml-2 inline-block align-middle text-muted-foreground" />
-                    </div>
-                    </Card>
-                  </a>
+                  </motion.a>
                 ))}
               </div>
 
-              <div className="text-center">
-                <Button variant="outline" size="lg" asChild>
+              <motion.div variants={itemVariants}>
+                <Button variant="outline" size="sm" asChild className="font-mono text-xs rounded-none border-[#3092FF]/20 hover:bg-[#3092FF]/5 hover:text-[#3092FF] hover:border-[#3092FF]/40">
                   <a href="https://blog.sanskarjaiswal.dev" target="_blank" rel="noopener noreferrer">
-                    <ExternalLink className="w-4 h-4 mr-2" />
-                    View All Posts
+                    <ExternalLink className="w-3.5 h-3.5 mr-2" />
+                    view_all_posts
                   </a>
                 </Button>
-              </div>
+              </motion.div>
             </>
           )}
-        </div>
-      </div>
+        </motion.div>
+      </SectionReveal>
     </section>
   )
 }

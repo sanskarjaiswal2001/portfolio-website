@@ -1,11 +1,10 @@
 "use client"
 
-import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { motion, useInView, type Variants } from "framer-motion"
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { useRef, useEffect, useState } from "react"
-import { usePerf } from "@/components/perf-provider"
+import { motion, useInView, useScroll, useTransform } from "framer-motion"
+import { useRef } from "react"
+import { containerVariants, timelineNodeVariants, slideFromLeft } from "@/lib/animation"
+import { SectionReveal } from "@/components/section-reveal"
 
 const experiences = [
   {
@@ -47,125 +46,115 @@ const experiences = [
   },
 ]
 
-export function ExperienceSection() {
+function TimelineNode({ experience, index }: { experience: typeof experiences[number]; index: number }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
-  const { lowPower } = usePerf()
-  const [prefersReduced, setPrefersReduced] = useState(false)
+  return (
+    <motion.div
+      ref={ref}
+      variants={timelineNodeVariants}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      className="relative pl-8 md:pl-12 pb-12 last:pb-0"
+    >
+      {/* Timeline dot — ctOS square */}
+      <div className="absolute left-0 top-1.5 w-3 h-3 border border-[#3092FF] bg-[#3092FF]/10 z-10" />
 
-  useEffect(() => {
-    try {
-      const mq = window.matchMedia("(prefers-reduced-motion: reduce)")
-      setPrefersReduced(mq.matches)
-      const handler = (e: MediaQueryListEvent) => setPrefersReduced(e.matches)
-      if (mq.addEventListener) mq.addEventListener("change", handler)
-      else mq.addListener(handler)
-      return () => {
-        if (mq.removeEventListener) mq.removeEventListener("change", handler)
-        else mq.removeListener(handler)
-      }
-    } catch (e) {
-      setPrefersReduced(false)
-    }
-  }, [])
+      {/* Connecting line */}
+      {index < experiences.length - 1 && (
+        <motion.div
+          className="absolute left-[5px] top-5 w-px bg-gradient-to-b from-[#3092FF]/40 to-transparent"
+          initial={{ height: 0 }}
+          animate={isInView ? { height: "100%" } : { height: 0 }}
+          transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+        />
+      )}
 
-  const enableMotion = !lowPower && !prefersReduced
+      {/* Content */}
+      <div className="space-y-4">
+        <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-1">
+          <div>
+            <h3 className="text-lg md:text-xl font-heading font-bold text-foreground uppercase tracking-wide">{experience.title}</h3>
+            <p className="text-[#3092FF] text-sm font-mono">{experience.company} — {experience.location}</p>
+          </div>
+          <span className="text-xs text-muted-foreground/50 font-mono shrink-0">{experience.period}</span>
+        </div>
 
-  // Lightweight entrance animation for the whole section.
-  // Avoid per-item springs and many motion wrappers to reduce CPU/GPU load.
-  const containerVariants: Variants = {
-    hidden: { opacity: 0, y: 8 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
-  }
+        <motion.div
+          className="flex flex-wrap gap-1.5"
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
+          {experience.technologies.map((tech) => (
+            <motion.div key={tech} variants={slideFromLeft}>
+              <Badge variant="secondary" className="bg-[#3092FF]/5 text-[#3092FF]/80 border border-[#3092FF]/15 text-[10px] font-mono rounded-none">
+                {tech}
+              </Badge>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        <ul className="space-y-2">
+          {experience.highlights.map((highlight, idx) => (
+            <motion.li
+              key={idx}
+              className="text-muted-foreground leading-relaxed flex items-start text-sm"
+              initial={{ opacity: 0, x: -10 }}
+              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
+              transition={{ delay: 0.2 + idx * 0.08, duration: 0.3 }}
+            >
+              <span className="text-[#3092FF]/40 mr-3 mt-1 shrink-0 font-mono text-xs">&gt;</span>
+              <span>{highlight}</span>
+            </motion.li>
+          ))}
+        </ul>
+      </div>
+    </motion.div>
+  )
+}
+
+export function ExperienceSection() {
+  const sectionRef = useRef(null)
+  const isInView = useInView(sectionRef, { once: true, margin: "-80px" })
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  })
+  const lineHeight = useTransform(scrollYProgress, [0.1, 0.8], ["0%", "100%"])
 
   return (
-    <section className="py-24 px-6 min-h-screen bg-secondary/20" ref={ref}>
-      <div className="max-w-6xl mx-auto">
-        {enableMotion ? (
-          <motion.div variants={containerVariants} initial="hidden" animate={isInView ? "visible" : "hidden"}>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-16 text-center">Professional Experience</h2>
+    <section id="experience" className="py-32 md:py-40 px-6 min-h-screen" ref={sectionRef}>
+      <SectionReveal className="max-w-4xl mx-auto">
+        <div className="mb-16">
+          <span className="section-label">02 — Experience</span>
+          <motion.h2
+            className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground tracking-tight uppercase"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.5 }}
+          >
+            Work<span className="text-[#3092FF]">_</span>History
+          </motion.h2>
+        </div>
 
-            <div className="space-y-8">
-              {experiences.map((exp, index) => (
-                <div key={index}>
-                  <div className="transform transition-transform duration-200 hover:-translate-y-1">
-                    <Card className="p-8 liquid-glass-card transition-all duration-300">
-                      <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-6">
-                        <div>
-                          <h3 className="text-2xl font-bold text-foreground mb-2">{exp.title}</h3>
-                          <p className="text-lg text-primary font-semibold">{exp.company} - {exp.location}</p>
-                        </div>
-                        <div className="mt-2 md:mt-0">
-                          <span className="text-muted-foreground font-medium">{exp.period}</span>
-                        </div>
-                      </div>
+        <div className="relative">
+          {/* Background track */}
+          <div className="absolute left-[5px] top-0 bottom-0 w-px bg-[#3092FF]/10" />
 
-                      <div className="flex flex-wrap gap-2 mb-6">
-                        {exp.technologies.map((tech) => (
-                          <div key={tech}>
-                            <Badge variant="secondary" className="bg-secondary/80 text-secondary-foreground">
-                              {tech}
-                            </Badge>
-                          </div>
-                        ))}
-                      </div>
+          {/* Animated progress */}
+          <motion.div
+            className="absolute left-[5px] top-0 w-px bg-[#3092FF]/30 origin-top"
+            style={{ height: lineHeight }}
+          />
 
-                      <ul className="space-y-3">
-                        {exp.highlights.map((highlight, idx) => (
-                          <li key={idx} className="text-muted-foreground leading-relaxed flex items-start">
-                            <span className="text-primary mr-3 mt-2">•</span>
-                            <span>{highlight}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </Card>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        ) : (
-          /* Low-power / reduced-motion fallback: static, non-animated content */
-          <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-12 text-center">Professional Experience</h2>
-
-            <div className="space-y-6">
-              {experiences.map((exp, index) => (
-                <div key={index}>
-                  <Card className="p-6 bg-secondary/30">
-                    <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
-                      <div>
-                        <h3 className="text-xl font-bold text-foreground mb-1">{exp.title}</h3>
-                        <p className="text-base text-primary font-semibold">{exp.company} - {exp.location}</p>
-                      </div>
-                      <div className="mt-1 md:mt-0">
-                        <span className="text-muted-foreground font-medium">{exp.period}</span>
-                      </div>
-                    </div>
-
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {exp.technologies.map((tech) => (
-                        <Badge key={tech} variant="secondary" className="bg-secondary/80 text-secondary-foreground">
-                          {tech}
-                        </Badge>
-                      ))}
-                    </div>
-
-                    <ul className="space-y-2">
-                      {exp.highlights.map((highlight, idx) => (
-                        <li key={idx} className="text-muted-foreground leading-relaxed">
-                          • {highlight}
-                        </li>
-                      ))}
-                    </ul>
-                  </Card>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
+          {experiences.map((exp, index) => (
+            <TimelineNode key={index} experience={exp} index={index} />
+          ))}
+        </div>
+      </SectionReveal>
     </section>
   )
 }
