@@ -1,6 +1,7 @@
 import { ContactForm } from "@/components/contact-form"
 import { BlogFeed } from "@/components/blog-feed"
 import { HeroRotatingText, HeroRoleText, HeroHoldUpText } from "@/components/hero-rotating-text"
+import { FooterEasterEgg } from "@/components/footer-easter-egg"
 
 export default function Home() {
   return (
@@ -297,12 +298,25 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ===================== STACK STRIP ===================== */}
+      <section className="pg-section pg-section--flush">
+        <div className="pg-container">
+          <div className="pg-stack-strip reveal">
+            <span>Python</span><span>FastAPI</span><span>Django</span>
+            <span>PostgreSQL</span><span>Docker</span><span>Kubernetes</span>
+            <span>React</span><span>Next.js</span><span>Azure OpenAI</span>
+            <span>Anthropic</span><span>LangChain</span><span>FastMCP</span>
+            <span>Prometheus</span><span>Grafana</span><span>GitLab CI</span>
+          </div>
+        </div>
+      </section>
+
       {/* ===================== BLOG ===================== */}
       <section id="writing" className="pg-section">
         <div className="pg-container">
           <div className="pg-section-head reveal">
             <div>
-              <div className="label">05 / Writing</div>
+              <div className="label">04 / Writing</div>
               <h2>Notes from the <em>terminal.</em></h2>
             </div>
             <div className="right">
@@ -326,7 +340,7 @@ export default function Home() {
         <div className="pg-container">
           <div className="pg-section-head reveal">
             <div>
-              <div className="label">06 / Contact</div>
+              <div className="label">05 / Contact</div>
               <h2>Say <em>hi.</em></h2>
             </div>
             <div className="right">/ replies within 24h, usually</div>
@@ -396,7 +410,7 @@ export default function Home() {
             <div>© 2026 Sanskar Jaiswal · made with too much coffee</div>
             <div>v3 · last shipped apr 2026</div>
           </div>
-          <span className="big">SANSKAR.</span>
+          <FooterEasterEgg />
         </div>
       </footer>
     </main>
