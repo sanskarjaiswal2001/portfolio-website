@@ -221,7 +221,7 @@ export default function Home() {
             >
               <div className="num">/01</div>
               <div>
-                <div className="name">Guardian <em>Modified</em></div>
+                <div className="name">Guardian Modified</div>
                 <div className="desc">
                   Token-based access control for GTA V peer-to-peer sessions. Firebase auth,
                   GCP-deployable, 1K+ active users. None of whom read the docs.
@@ -241,7 +241,7 @@ export default function Home() {
             >
               <div className="num">/02</div>
               <div>
-                <div className="name"><em>AIgis</em></div>
+                <div className="name">AIgis</div>
                 <div className="desc">
                   Homelab monitoring with 11 metric collectors, a cascading-severity rules
                   engine, Claude analysis at ~$0.01/scan, and 13 approval-gated remediation
@@ -262,7 +262,7 @@ export default function Home() {
             >
               <div className="num">/03</div>
               <div>
-                <div className="name">Eth<em>gram</em></div>
+                <div className="name">Ethgram</div>
                 <div className="desc">
                   Decentralised photo sharing on Ethereum. Images live on IPFS, ownership
                   verified on-chain. Built this when I thought gas fees were a reasonable UX tradeoff.
@@ -282,7 +282,7 @@ export default function Home() {
             >
               <div className="num">/04</div>
               <div>
-                <div className="name">DAO <em>Voting</em></div>
+                <div className="name">DAO Voting</div>
                 <div className="desc">
                   On-chain governance with proposal creation, delegation, and time-locked
                   execution. Solidity + Truffle, deployed to Ethereum testnet. Peak 2021 energy.
@@ -293,75 +293,6 @@ export default function Home() {
               </div>
               <div className="arrow">↗</div>
             </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ===================== SKILLS ===================== */}
-      <section id="skills" className="pg-section">
-        <div className="pg-container">
-          <div className="pg-section-head reveal">
-            <div>
-              <div className="label">04 / Stack</div>
-              <h2>Tools I reach for <em>first.</em></h2>
-            </div>
-            <div className="right">/ updated apr 2026</div>
-          </div>
-
-          <div className="pg-skills">
-            <div className="skill-row reveal">
-              <div className="skill-cat">Languages</div>
-              <div className="skill-tags">
-                <span>Python</span><span>TypeScript</span><span>JavaScript</span>
-                <span>Java</span><span>Dart</span><span>Bash</span><span>Solidity</span>
-              </div>
-            </div>
-            <div className="skill-row reveal">
-              <div className="skill-cat">Frameworks</div>
-              <div className="skill-tags">
-                <span>FastAPI</span><span>Django</span><span>React</span>
-                <span>Next.js</span><span>Flutter</span>
-              </div>
-            </div>
-            <div className="skill-row reveal">
-              <div className="skill-cat">AI &amp; Data</div>
-              <div className="skill-tags">
-                <span>Azure OpenAI</span><span>Anthropic</span><span>LangChain</span>
-                <span>LangGraph</span><span>LlamaIndex</span><span>FastMCP</span>
-                <span>Whisper</span><span>HuggingFace</span>
-              </div>
-            </div>
-            <div className="skill-row reveal">
-              <div className="skill-cat">Storage</div>
-              <div className="skill-tags">
-                <span>PostgreSQL</span><span>MSSQL</span><span>MongoDB</span><span>Redis</span>
-              </div>
-            </div>
-            <div className="skill-row reveal">
-              <div className="skill-cat">Infra</div>
-              <div className="skill-tags">
-                <span>Docker</span><span>Podman</span><span>Kubernetes</span>
-                <span>Nginx</span><span>Caddy</span>
-              </div>
-            </div>
-            <div className="skill-row reveal">
-              <div className="skill-cat">Observability</div>
-              <div className="skill-tags">
-                <span>Prometheus</span><span>Grafana</span>
-              </div>
-            </div>
-            <div className="skill-row reveal">
-              <div className="skill-cat">CI / CD</div>
-              <div className="skill-tags">
-                <span>GitHub Actions</span><span>GitLab CI</span>
-              </div>
-            </div>
-            <div className="skill-row reveal">
-              <div className="skill-cat">Daily drivers</div>
-              <div className="skill-tags">
-                <span>Zed</span><span>Vim</span><span>Git</span><span>Fish</span><span>JIRA</span>
-              </div>
-            </div>
           </div>
         </div>
       </section>

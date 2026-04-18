@@ -601,48 +601,6 @@
   .pg-project .desc { grid-column: 2 / 3; }
 }
 
-/* ============================================================
-   SKILLS
-   ============================================================ */
-.pg-skills {
-  display: flex; flex-direction: column;
-  border: 1px solid var(--rule);
-  border-radius: var(--pg-radius);
-  overflow: hidden;
-}
-.skill-row {
-  display: grid;
-  grid-template-columns: 130px 1fr;
-  gap: 20px;
-  padding: 16px 24px;
-  border-bottom: 1px solid var(--rule);
-  align-items: start;
-}
-.skill-row:last-child { border-bottom: none; }
-.skill-cat {
-  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
-  font-size: 11px; color: var(--ink-3);
-  text-transform: uppercase; letter-spacing: 0.08em;
-  padding-top: 5px; flex-shrink: 0;
-}
-.skill-tags {
-  display: flex; flex-wrap: wrap; gap: 6px;
-}
-.skill-tags span {
-  font-size: 13px; color: var(--ink);
-  padding: 4px 10px;
-  background: var(--paper-2); border: 1px solid var(--rule);
-  border-radius: 6px;
-  white-space: nowrap;
-  transition: background 0.15s, color 0.15s;
-}
-.skill-tags span:hover {
-  background: var(--ink); color: var(--paper);
-  border-color: var(--ink);
-}
-@media (max-width: 600px) {
-  .skill-row { grid-template-columns: 1fr; gap: 8px; padding: 14px 18px; }
-}
 
 /* ============================================================
    BLOG
@@ -848,7 +806,6 @@
   .pg-project .name { font-size: clamp(18px, 5vw, 22px); }
   .pg-project .desc { grid-column: 2 / 3; font-size: 13px; }
 
-  /* Skills — handled by .skill-row media query */
 
   /* Blog */
   .pg-post { padding: 20px 0; gap: 4px; }
