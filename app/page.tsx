@@ -24,7 +24,7 @@ export default function Home() {
             <div className="meta">
               <div className="row"><span>Currently</span><b>Software Engineer @ Betsol</b></div>
               <div className="row"><span>Stack</span><b>Python · FastAPI · Postgres · Docker</b></div>
-              <div className="row"><span>Time in the field</span><b>2.6 years</b></div>
+              <div className="row"><span>Time in the field</span><b>3 years</b></div>
               <div className="row"><span>Location</span><b>Bangalore, open to remote</b></div>
             </div>
           </div>
