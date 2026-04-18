@@ -77,7 +77,7 @@ export function HeroRoleText() {
 
 export function HeroHoldUpText() {
   const display = useScrambleField("hold")
-  return <em style={{ display: "inline-block", minWidth: "7ch" }}>{display}</em>
+  return <em>{display}</em>
 }
 
 export function HeroRotatingText() {
