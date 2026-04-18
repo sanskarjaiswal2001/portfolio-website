@@ -313,6 +313,18 @@
 .hero-under-sizer em {
   grid-area: 1 / 1;
 }
+.hero-hold-sizer {
+  display: inline-grid;
+}
+.hero-hold-sizer::after {
+  content: "hold up";
+  visibility: hidden;
+  grid-area: 1 / 1;
+  font-style: italic;
+}
+.hero-hold-sizer em {
+  grid-area: 1 / 1;
+}
 .pg-hero .pitch {
   display: grid;
   grid-template-columns: 1fr 1fr;
