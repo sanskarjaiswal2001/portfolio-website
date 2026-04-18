@@ -8,11 +8,11 @@ const SYNC_INTERVAL = 3400
 // Curated states — every combination reads as a coherent sentence
 const STATES = [
   { role: "Backend engineer.", hold: "hold up",  under: "real load."     },
-  { role: "AI engineer.",      hold: "scale",     under: "10M records."   },
-  { role: "Python engineer.",  hold: "survive",   under: "3am incidents." },
-  { role: "Backend engineer.", hold: "deliver",   under: "your SLA."      },
-  { role: "AI engineer.",      hold: "perform",   under: "production."    },
-  { role: "Python engineer.",  hold: "last",      under: "any load."      },
+  { role: "AI engineer.",      hold: "reason",   under: "pressure."      },
+  { role: "Python engineer.",  hold: "last",     under: "any load."      },
+  { role: "Backend engineer.", hold: "deliver",  under: "your SLA."      },
+  { role: "AI engineer.",      hold: "keep up",  under: "production."    },
+  { role: "Python engineer.",  hold: "survive",  under: "real pressure." },
 ]
 
 // Shared module-level index so all three fields change together
