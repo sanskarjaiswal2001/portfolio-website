@@ -542,51 +542,43 @@
    SKILLS
    ============================================================ */
 .pg-skills {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: color-mix(in oklab, var(--rule) 50%, transparent);
-  border: 1px solid color-mix(in oklab, var(--rule) 60%, transparent);
+  display: flex; flex-direction: column;
+  border: 1px solid var(--rule);
   border-radius: var(--pg-radius);
   overflow: hidden;
-  box-shadow: 0 2px 12px oklch(0 0 0 / 0.05);
 }
-@media (max-width: 800px) { .pg-skills { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 500px) { .pg-skills { grid-template-columns: 1fr; } }
-
-.pg-skills .cell {
-  background: color-mix(in oklab, var(--paper) 80%, transparent);
-  padding: 28px 24px;
-  transition: background 0.25s ease;
+.skill-row {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 20px;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--rule);
+  align-items: start;
 }
-.pg-skills .cell:hover {
-  background: color-mix(in oklab, var(--paper-2) 70%, transparent);
-}
-.pg-skills .cell .head {
+.skill-row:last-child { border-bottom: none; }
+.skill-cat {
   font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
   font-size: 11px; color: var(--ink-3);
-  text-transform: uppercase; letter-spacing: 0.1em;
-  margin-bottom: 18px;
-  display: flex; align-items: center; gap: 8px;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  padding-top: 5px; flex-shrink: 0;
 }
-.pg-skills .cell .head .dot {
-  width: 6px; height: 6px; border-radius: 50%; background: var(--pg-accent);
-  flex-shrink: 0;
-}
-.pg-skills .cell ul {
-  list-style: none; padding: 0; margin: 0;
+.skill-tags {
   display: flex; flex-wrap: wrap; gap: 6px;
 }
-.pg-skills .cell ul li {
+.skill-tags span {
   font-size: 13px; color: var(--ink);
   padding: 4px 10px;
   background: var(--paper-2); border: 1px solid var(--rule);
   border-radius: 6px;
-  transition: all 0.2s ease;
   white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
 }
-.pg-skills .cell ul li:hover {
+.skill-tags span:hover {
   background: var(--ink); color: var(--paper);
-  border-color: var(--ink); transform: translateY(-1px);
+  border-color: var(--ink);
+}
+@media (max-width: 600px) {
+  .skill-row { grid-template-columns: 1fr; gap: 8px; padding: 14px 18px; }
 }
 
 /* ============================================================
@@ -793,9 +785,7 @@
   .pg-project .name { font-size: clamp(18px, 5vw, 22px); }
   .pg-project .desc { grid-column: 2 / 3; font-size: 13px; }
 
-  /* Skills */
-  .pg-skills { grid-template-columns: 1fr 1fr; }
-  .pg-skills .cell { padding: 18px 16px; }
+  /* Skills — handled by .skill-row media query */
 
   /* Blog */
   .pg-post { padding: 20px 0; gap: 4px; }

@@ -72,15 +72,15 @@ function useScrambleField(field: keyof (typeof STATES)[0]) {
 
 export function HeroRoleText() {
   const display = useScrambleField("role")
-  return <span style={{ display: "inline-block" }}>{display}</span>
+  return <span style={{ display: "inline-block", minWidth: "17ch" }}>{display}</span>
 }
 
 export function HeroHoldUpText() {
   const display = useScrambleField("hold")
-  return <em>{display}</em>
+  return <em style={{ display: "inline-block", minWidth: "7ch" }}>{display}</em>
 }
 
 export function HeroRotatingText() {
   const display = useScrambleField("under")
-  return <em style={{ display: "inline-block", minWidth: "13ch" }}>{display}</em>
+  return <em style={{ display: "inline-block", minWidth: "14ch" }}>{display}</em>
 }

@@ -308,59 +308,59 @@ export default function Home() {
             <div className="right">/ updated apr 2026</div>
           </div>
 
-          <div className="pg-skills reveal">
-            <div className="cell">
-              <div className="head"><span className="dot" />Languages</div>
-              <ul>
-                <li>Python</li><li>TypeScript</li><li>JavaScript</li>
-                <li>Java</li><li>Dart</li><li>Bash</li><li>Solidity</li>
-              </ul>
+          <div className="pg-skills">
+            <div className="skill-row reveal">
+              <div className="skill-cat">Languages</div>
+              <div className="skill-tags">
+                <span>Python</span><span>TypeScript</span><span>JavaScript</span>
+                <span>Java</span><span>Dart</span><span>Bash</span><span>Solidity</span>
+              </div>
             </div>
-            <div className="cell">
-              <div className="head"><span className="dot" />Frameworks</div>
-              <ul>
-                <li>FastAPI</li><li>Django</li><li>React</li><li>Next.js</li>
-                <li>Flutter</li>
-              </ul>
+            <div className="skill-row reveal">
+              <div className="skill-cat">Frameworks</div>
+              <div className="skill-tags">
+                <span>FastAPI</span><span>Django</span><span>React</span>
+                <span>Next.js</span><span>Flutter</span>
+              </div>
             </div>
-            <div className="cell">
-              <div className="head"><span className="dot" />AI &amp; Data</div>
-              <ul>
-                <li>Azure OpenAI</li><li>Anthropic</li><li>LangChain</li>
-                <li>LangGraph</li><li>LlamaIndex</li><li>FastMCP</li>
-                <li>Whisper</li><li>HuggingFace</li>
-              </ul>
+            <div className="skill-row reveal">
+              <div className="skill-cat">AI &amp; Data</div>
+              <div className="skill-tags">
+                <span>Azure OpenAI</span><span>Anthropic</span><span>LangChain</span>
+                <span>LangGraph</span><span>LlamaIndex</span><span>FastMCP</span>
+                <span>Whisper</span><span>HuggingFace</span>
+              </div>
             </div>
-            <div className="cell">
-              <div className="head"><span className="dot" />Storage</div>
-              <ul>
-                <li>PostgreSQL</li><li>MSSQL</li><li>MongoDB</li><li>Redis</li>
-              </ul>
+            <div className="skill-row reveal">
+              <div className="skill-cat">Storage</div>
+              <div className="skill-tags">
+                <span>PostgreSQL</span><span>MSSQL</span><span>MongoDB</span><span>Redis</span>
+              </div>
             </div>
-            <div className="cell">
-              <div className="head"><span className="dot" />Infra</div>
-              <ul>
-                <li>Docker</li><li>Podman</li><li>Kubernetes</li>
-                <li>Nginx</li><li>Caddy</li>
-              </ul>
+            <div className="skill-row reveal">
+              <div className="skill-cat">Infra</div>
+              <div className="skill-tags">
+                <span>Docker</span><span>Podman</span><span>Kubernetes</span>
+                <span>Nginx</span><span>Caddy</span>
+              </div>
             </div>
-            <div className="cell">
-              <div className="head"><span className="dot" />Observability</div>
-              <ul>
-                <li>Prometheus</li><li>Grafana</li>
-              </ul>
+            <div className="skill-row reveal">
+              <div className="skill-cat">Observability</div>
+              <div className="skill-tags">
+                <span>Prometheus</span><span>Grafana</span>
+              </div>
             </div>
-            <div className="cell">
-              <div className="head"><span className="dot" />CI / CD</div>
-              <ul>
-                <li>GitHub Actions</li><li>GitLab CI</li>
-              </ul>
+            <div className="skill-row reveal">
+              <div className="skill-cat">CI / CD</div>
+              <div className="skill-tags">
+                <span>GitHub Actions</span><span>GitLab CI</span>
+              </div>
             </div>
-            <div className="cell">
-              <div className="head"><span className="dot" />Daily drivers</div>
-              <ul>
-                <li>Zed</li><li>Vim</li><li>Git</li><li>Fish</li><li>JIRA</li>
-              </ul>
+            <div className="skill-row reveal">
+              <div className="skill-cat">Daily drivers</div>
+              <div className="skill-tags">
+                <span>Zed</span><span>Vim</span><span>Git</span><span>Fish</span><span>JIRA</span>
+              </div>
             </div>
           </div>
         </div>
