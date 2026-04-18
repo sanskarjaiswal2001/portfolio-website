@@ -73,7 +73,11 @@ function useScrambleField(field: keyof (typeof STATES)[0]) {
 
 export function HeroRoleText() {
   const display = useScrambleField("role")
-  return <span className="hero-role-text">{display}</span>
+  return (
+    <span className="hero-role-text">
+      <span className="hero-role-sizer"><span>{display}</span></span>
+    </span>
+  )
 }
 
 export function HeroHoldUpText() {

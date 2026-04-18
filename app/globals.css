@@ -298,6 +298,18 @@
 .hero-role-text {
   display: block;
 }
+.hero-role-sizer {
+  display: inline-grid;
+}
+/* Ghost uses uppercase — matches worst-case scramble char width */
+.hero-role-sizer::after {
+  content: "BACKEND ENGINEER.";
+  visibility: hidden;
+  grid-area: 1 / 1;
+}
+.hero-role-sizer > span {
+  grid-area: 1 / 1;
+}
 .hero-under-line {
   display: block;
 }
@@ -305,7 +317,7 @@
   display: inline-grid;
 }
 .hero-under-sizer::after {
-  content: "real pressure.";
+  content: "REAL PRESSURE.";
   visibility: hidden;
   grid-area: 1 / 1;
   font-style: italic;
@@ -317,7 +329,7 @@
   display: inline-grid;
 }
 .hero-hold-sizer::after {
-  content: "hold up";
+  content: "HOLD UP";
   visibility: hidden;
   grid-area: 1 / 1;
   font-style: italic;
