@@ -121,6 +121,9 @@
 @layer base {
   *, *::before, *::after { box-sizing: border-box; }
 
+  html { overflow-x: clip; }
+  main { overflow-x: hidden; }
+
   * { @apply border-border outline-ring/50; }
 
 
@@ -801,6 +804,6 @@
   .pg-nav .cta { display: none; }
 
   /* Footer */
-  .pg-footer { padding: 32px 0; margin-top: 48px; }
-  .pg-footer .big { font-size: clamp(48px, 18vw, 100px); margin-top: 24px; }
+  .pg-footer { padding: 32px 0; margin-top: 48px; overflow: hidden; }
+  .pg-footer .big { font-size: clamp(32px, 10vw, 64px); margin-top: 24px; }
 }
