@@ -298,12 +298,12 @@
 .hero-role-text {
   display: block;
 }
-/* inline-block ghost: ::after reserves space, actual text overlays via abs pos */
+/* inline-block ghost: ::after reserves space, actual text overlays via abs pos.
+   overflow:hidden on the child (not container) — avoids inline-block baseline shift */
 .hero-role-sizer {
   display: inline-block;
   position: relative;
   vertical-align: baseline;
-  overflow: hidden;
 }
 .hero-role-sizer::after {
   content: "BACKEND ENGINEER.";
@@ -315,6 +315,8 @@
   top: 0;
   left: 0;
   white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
 }
 .hero-under-line {
   display: block;
@@ -323,7 +325,6 @@
   display: inline-block;
   position: relative;
   vertical-align: baseline;
-  overflow: hidden;
 }
 .hero-under-sizer::after {
   content: "REAL PRESSURE.";
@@ -336,12 +337,13 @@
   top: 0;
   left: 0;
   white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
 }
 .hero-hold-sizer {
   display: inline-block;
   position: relative;
   vertical-align: baseline;
-  overflow: hidden;
 }
 .hero-hold-sizer::after {
   content: "HOLD UP";
@@ -354,6 +356,8 @@
   top: 0;
   left: 0;
   white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
 }
 .pg-hero .pitch {
   display: grid;
