@@ -5,8 +5,16 @@
  */
 
 const nextConfig = {
-  // example options (copy settings from your TS config if needed)
   reactStrictMode: true,
+  experimental: {
+    optimizePackageImports: [
+      "lucide-react",
+      "date-fns",
+    ],
+  },
+  images: {
+    formats: ["image/avif", "image/webp"],
+  },
 };
 
 export default nextConfig;

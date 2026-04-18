@@ -1,32 +1,39 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Share_Tech_Mono, Barlow_Condensed } from "next/font/google"
+import { Inter_Tight, JetBrains_Mono, Instrument_Serif } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
-import { PerfProvider } from "@/components/perf-provider"
+import { Suspense } from "react"
 import { Navigation } from "@/components/navigation"
-import { AuroraBackground } from "@/components/aurora-background"
-import { CursorGlow } from "@/components/cursor-glow"
+import { RevealInit } from "@/components/reveal-init"
 import "./globals.css"
 
-const shareTechMono = Share_Tech_Mono({
-  weight: "400",
+const interTight = Inter_Tight({
   subsets: ["latin"],
-  variable: "--font-share-tech",
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-inter-tight",
   display: "swap",
 })
 
-const barlowCondensed = Barlow_Condensed({
-  weight: ["400", "600", "700"],
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-barlow",
+  weight: ["300", "400", "500"],
+  variable: "--font-jetbrains-mono",
+  display: "swap",
+})
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: ["400"],
+  style: ["normal", "italic"],
+  variable: "--font-instrument-serif",
   display: "swap",
 })
 
 export const metadata: Metadata = {
-  title: "Sanskar Jaiswal - Software Engineer",
+  title: "Sanskar Jaiswal, Software Engineer",
   description:
-    "Python Developer with 2.6 years of experience delivering backend systems, automation frameworks, and AI-driven applications.",
+    "Backend engineer at Betsol. I build Python backends, AI pipelines, and automation that quietly saves real money.",
   icons: {
     icon: "/avatar.jpg",
     shortcut: "/avatar.jpg",
@@ -39,17 +46,18 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html
+      lang="en"
+      className={`dark ${interTight.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <link rel="icon" href="/avatar.jpg" />
       </head>
-      <body className={`font-mono ${shareTechMono.variable} ${barlowCondensed.variable} antialiased grain-overlay`}>
+      <body>
         <Navigation />
-        <PerfProvider>
-          <AuroraBackground />
-          <CursorGlow />
-          {children}
-        </PerfProvider>
+        <RevealInit />
+        <Suspense fallback={null}>{children}</Suspense>
         <Analytics />
         <SpeedInsights />
       </body>

@@ -5,7 +5,7 @@ const BLOG_HOST = "blog.sanskarjaiswal.dev"
 
 const QUERY = `{
   publication(host: "${BLOG_HOST}") {
-    posts(first: 6) {
+    posts(first: 4) {
       edges {
         node {
           title
@@ -13,9 +13,6 @@ const QUERY = `{
           slug
           publishedAt
           url
-          tags {
-            name
-          }
         }
       }
     }
@@ -24,35 +21,31 @@ const QUERY = `{
 
 export async function GET() {
   try {
-    const response = await fetch(HASHNODE_GQL, {
+    const res = await fetch(HASHNODE_GQL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      next: { revalidate: 1800 },
       body: JSON.stringify({ query: QUERY }),
-      next: { revalidate: 3600 },
     })
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch from Hashnode API")
-    }
+    if (!res.ok) throw new Error(`${res.status}`)
 
-    const json = await response.json()
-    const edges = json?.data?.publication?.posts?.edges || []
+    const json = await res.json()
+    const edges = json?.data?.publication?.posts?.edges ?? []
 
-    const posts = edges.map((edge: { node: { title: string; brief: string; publishedAt: string; url: string; tags?: { name: string }[] } }) => {
-      const node = edge.node
-      const firstTag = node.tags?.[0]?.name
-      return {
-        title: node.title,
-        excerpt: node.brief.length > 160 ? node.brief.substring(0, 160) + "..." : node.brief,
-        date: new Date(node.publishedAt).toISOString().split("T")[0],
-        link: node.url,
-        category: firstTag || undefined,
-      }
+    const posts = edges.map(({ node }: {
+      node: { title: string; brief: string; slug: string; publishedAt: string; url: string }
+    }) => ({
+      title: node.title,
+      excerpt: node.brief?.slice(0, 150) + (node.brief?.length > 150 ? "…" : ""),
+      date: node.publishedAt ? new Date(node.publishedAt).toISOString().split("T")[0] : undefined,
+      link: node.url,
+    }))
+
+    return NextResponse.json(posts, {
+      headers: { "Cache-Control": "public, s-maxage=1800, stale-while-revalidate=3600" },
     })
-
-    return NextResponse.json(posts)
-  } catch (error) {
-    console.error("Error fetching blog posts:", error)
-    return NextResponse.json({ error: "Failed to fetch blog posts" }, { status: 500 })
+  } catch {
+    return NextResponse.json({ error: "unavailable" }, { status: 503 })
   }
 }
