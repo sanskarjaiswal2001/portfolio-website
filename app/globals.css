@@ -298,6 +298,21 @@
 .hero-role-text {
   display: block;
 }
+.hero-under-line {
+  display: block;
+}
+.hero-under-sizer {
+  display: inline-grid;
+}
+.hero-under-sizer::after {
+  content: "real pressure.";
+  visibility: hidden;
+  grid-area: 1 / 1;
+  font-style: italic;
+}
+.hero-under-sizer em {
+  grid-area: 1 / 1;
+}
 .pg-hero .pitch {
   display: grid;
   grid-template-columns: 1fr 1fr;
