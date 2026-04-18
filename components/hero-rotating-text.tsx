@@ -6,13 +6,14 @@ const SCRAMBLE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%!&*?0123456789"
 const SYNC_INTERVAL = 3400
 
 // Curated states — every combination reads as a coherent sentence
+// [hold]+[under] char counts: 17, 15, 18, 16, 18, 16 — within 3 chars, stable wrapping
 const STATES = [
-  { role: "Backend engineer.", hold: "hold up",  under: "real load."     },
-  { role: "AI engineer.",      hold: "reason",   under: "pressure."      },
-  { role: "Python engineer.",  hold: "last",     under: "any load."      },
-  { role: "Backend engineer.", hold: "deliver",  under: "your SLA."      },
-  { role: "AI engineer.",      hold: "keep up",  under: "production."    },
-  { role: "Python engineer.",  hold: "survive",  under: "real pressure." },
+  { role: "Backend engineer.", hold: "hold up",  under: "real load."    },
+  { role: "AI engineer.",      hold: "reason",   under: "any load."     },
+  { role: "Python engineer.",  hold: "last",     under: "real pressure."},
+  { role: "Backend engineer.", hold: "deliver",  under: "your SLA."     },
+  { role: "AI engineer.",      hold: "keep up",  under: "production."   },
+  { role: "Python engineer.",  hold: "survive",  under: "pressure."     },
 ]
 
 // Shared module-level index so all three fields change together
