@@ -6,6 +6,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Suspense } from "react"
 import { Navigation } from "@/components/navigation"
 import { RevealInit } from "@/components/reveal-init"
+import { ErrorFilter } from "@/components/error-filter"
 import "./globals.css"
 
 const interTight = Inter_Tight({
@@ -55,6 +56,7 @@ export default function RootLayout({
         <link rel="icon" href="/avatar.jpg" />
       </head>
       <body>
+        <ErrorFilter />
         <Navigation />
         <RevealInit />
         <Suspense fallback={null}>{children}</Suspense>
