@@ -86,7 +86,7 @@ export default function Home() {
                 <ul>
                   <li>
                     <span className="k">building</span>
-                    <span>Claude Code skills framework, 5 plugins in flight</span>
+                    <span>AIgis v2 — agentic homelab framework, multi-node support</span>
                   </li>
                   <li>
                     <span className="k">reading</span>
@@ -298,20 +298,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===================== STACK STRIP ===================== */}
-      <section className="pg-section pg-section--flush">
-        <div className="pg-container">
-          <div className="pg-stack-strip reveal">
-            <span>Python</span><span>FastAPI</span><span>Django</span>
-            <span>PostgreSQL</span><span>Docker</span><span>Kubernetes</span>
-            <span>React</span><span>Next.js</span><span>Azure OpenAI</span>
-            <span>Anthropic</span><span>LangChain</span><span>FastMCP</span>
-            <span>Prometheus</span><span>Grafana</span><span>GitLab CI</span>
-          </div>
-        </div>
-      </section>
-
-      {/* ===================== BLOG ===================== */}
+{/* ===================== BLOG ===================== */}
       <section id="writing" className="pg-section">
         <div className="pg-container">
           <div className="pg-section-head reveal">
