@@ -86,7 +86,7 @@ export default function Home() {
                 <ul>
                   <li>
                     <span className="k">building</span>
-                    <span>AIgis v2 — agentic homelab framework, multi-node support</span>
+                    <span>AIgis v2, agentic homelab framework, multi-node support</span>
                   </li>
                   <li>
                     <span className="k">reading</span>
