@@ -2,7 +2,8 @@
 
 import { useEffect, useState, useRef, useCallback } from "react"
 
-const SCRAMBLE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%!&*?0123456789"
+const SCRAMBLE_UPPER = "ABCDEFGHIJKLNOPRSTUVXYZ0123456789"
+const SCRAMBLE_LOWER = "abcdefghijklnorstuvxyz0123456789"
 const SYNC_INTERVAL = 3400
 
 // Curated states — every combination reads as a coherent sentence
@@ -48,7 +49,11 @@ function useScrambleField(field: keyof (typeof STATES)[0]) {
       const locked = Math.floor(lockedCount)
       setDisplay(
         target.split("").map((ch, i) =>
-          i < locked ? ch : SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)]
+          i < locked ? ch : /[A-Z]/.test(ch)
+            ? SCRAMBLE_UPPER[Math.floor(Math.random() * SCRAMBLE_UPPER.length)]
+            : /[a-z]/.test(ch)
+            ? SCRAMBLE_LOWER[Math.floor(Math.random() * SCRAMBLE_LOWER.length)]
+            : ch
         ).join("")
       )
       if (locked >= target.length) {

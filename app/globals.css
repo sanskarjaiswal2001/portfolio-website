@@ -299,16 +299,15 @@
   display: block;
 }
 /* inline-block ghost: ::after reserves space, actual text overlays via abs pos.
-   clip-path on container clips wide scramble chars without affecting baseline.
-   -0.5em bottom extension preserves descenders (g, y, p). */
+   Ghost uses actual mixed-case longest value — same case as scramble chars,
+   so no width overflow, no clipping needed. */
 .hero-role-sizer {
   display: inline-block;
   position: relative;
   vertical-align: baseline;
-  clip-path: inset(0 0 -0.5em 0);
 }
 .hero-role-sizer::after {
-  content: "BACKEND ENGINEER.";
+  content: "Backend engineer.";
   visibility: hidden;
   white-space: nowrap;
 }
@@ -325,10 +324,9 @@
   display: inline-block;
   position: relative;
   vertical-align: baseline;
-  clip-path: inset(0 0 -0.5em 0);
 }
 .hero-under-sizer::after {
-  content: "REAL PRESSURE.";
+  content: "real pressure.";
   visibility: hidden;
   white-space: nowrap;
   font-style: italic;
@@ -343,10 +341,9 @@
   display: inline-block;
   position: relative;
   vertical-align: baseline;
-  clip-path: inset(0 0 -0.5em 0);
 }
 .hero-hold-sizer::after {
-  content: "HOLD UP";
+  content: "hold up";
   visibility: hidden;
   white-space: nowrap;
   font-style: italic;
@@ -575,8 +572,7 @@
   font-weight: 500; letter-spacing: -0.02em;
 }
 .pg-project .name em {
-  font-family: var(--font-instrument-serif), serif;
-  font-style: italic; font-weight: 400; color: var(--pg-accent);
+  font-style: italic;
 }
 .pg-project .stack {
   font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
