@@ -30,7 +30,7 @@ export default function Home() {
         </div>
 
         {/* Marquee strip */}
-        <div className="pg-marquee" style={{ marginTop: "100px" }}>
+        <div className="pg-marquee pg-marquee--hero">
           <div className="track">
             <span className="item"><b>3M+</b> records in production RAG</span>
             <span className="item star">✦</span>
