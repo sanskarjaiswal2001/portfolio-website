@@ -303,6 +303,7 @@
   display: inline-block;
   position: relative;
   vertical-align: baseline;
+  overflow: hidden;
 }
 .hero-role-sizer::after {
   content: "BACKEND ENGINEER.";
@@ -322,6 +323,7 @@
   display: inline-block;
   position: relative;
   vertical-align: baseline;
+  overflow: hidden;
 }
 .hero-under-sizer::after {
   content: "REAL PRESSURE.";
@@ -339,6 +341,7 @@
   display: inline-block;
   position: relative;
   vertical-align: baseline;
+  overflow: hidden;
 }
 .hero-hold-sizer::after {
   content: "HOLD UP";
