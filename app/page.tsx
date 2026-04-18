@@ -1,7 +1,7 @@
-import { ContactForm } from "@/components/contact-form"
 import { BlogFeed } from "@/components/blog-feed"
 import { HeroRotatingText, HeroRoleText, HeroHoldUpText } from "@/components/hero-rotating-text"
 import { FooterEasterEgg } from "@/components/footer-easter-egg"
+import { CopyEmail } from "@/components/copy-email"
 
 export default function Home() {
   return (
@@ -330,7 +330,7 @@ export default function Home() {
               <div className="label">05 / Contact</div>
               <h2>Say <em>hi.</em></h2>
             </div>
-            <div className="right">/ replies within 24h, usually</div>
+            <div className="right">/ get in touch</div>
           </div>
 
           <div className="pg-contact-wrap">
@@ -344,18 +344,11 @@ export default function Home() {
                 Backend systems, AI pipelines, automation that pays for itself. Or a side
                 project that needs someone who won&apos;t just nod along. Pitch me.
               </p>
-              <ContactForm />
             </div>
 
             <div className="reveal">
               <div className="pg-links">
-                <a href="mailto:sanskar.jaiswal.work@gmail.com">
-                  <span>
-                    <span className="pg-link-tag">EMAIL</span>
-                    sanskar.jaiswal.work@gmail.com
-                  </span>
-                  <span className="arrow">↗</span>
-                </a>
+                <CopyEmail />
                 <a href="https://linkedin.com/in/sanskarjaiswal" target="_blank" rel="noopener noreferrer">
                   <span>
                     <span className="pg-link-tag">LINKEDIN</span>
@@ -377,7 +370,7 @@ export default function Home() {
                   </span>
                   <span className="arrow">↗</span>
                 </a>
-                <a href="#">
+                <a href="/resume.pdf" download="Sanskar_Jaiswal_Resume.pdf">
                   <span>
                     <span className="pg-link-tag">RESUME</span>
                     download .pdf

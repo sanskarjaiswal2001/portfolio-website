@@ -39,6 +39,23 @@ export const metadata: Metadata = {
     icon: "/avatar.jpg",
     shortcut: "/avatar.jpg",
   },
+  openGraph: {
+    title: "Sanskar Jaiswal, Software Engineer",
+    description:
+      "Backend engineer at Betsol. I build Python backends, AI pipelines, and automation that quietly saves real money.",
+    url: "https://sanskarjaiswal.dev",
+    siteName: "Sanskar Jaiswal",
+    images: [{ url: "https://sanskarjaiswal.dev/avatar.jpg", width: 400, height: 400, alt: "Sanskar Jaiswal" }],
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary",
+    title: "Sanskar Jaiswal, Software Engineer",
+    description:
+      "Backend engineer at Betsol. I build Python backends, AI pipelines, and automation that quietly saves real money.",
+    images: ["https://sanskarjaiswal.dev/avatar.jpg"],
+  },
 }
 
 export default function RootLayout({
