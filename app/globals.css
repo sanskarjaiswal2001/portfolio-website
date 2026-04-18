@@ -298,44 +298,59 @@
 .hero-role-text {
   display: block;
 }
+/* inline-block ghost: ::after reserves space, actual text overlays via abs pos */
 .hero-role-sizer {
-  display: inline-grid;
+  display: inline-block;
+  position: relative;
+  vertical-align: baseline;
 }
-/* Ghost uses uppercase — matches worst-case scramble char width */
 .hero-role-sizer::after {
   content: "BACKEND ENGINEER.";
   visibility: hidden;
-  grid-area: 1 / 1;
+  white-space: nowrap;
 }
 .hero-role-sizer > span {
-  grid-area: 1 / 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
 }
 .hero-under-line {
   display: block;
 }
 .hero-under-sizer {
-  display: inline-grid;
+  display: inline-block;
+  position: relative;
+  vertical-align: baseline;
 }
 .hero-under-sizer::after {
   content: "REAL PRESSURE.";
   visibility: hidden;
-  grid-area: 1 / 1;
+  white-space: nowrap;
   font-style: italic;
 }
 .hero-under-sizer em {
-  grid-area: 1 / 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
 }
 .hero-hold-sizer {
-  display: inline-grid;
+  display: inline-block;
+  position: relative;
+  vertical-align: baseline;
 }
 .hero-hold-sizer::after {
   content: "HOLD UP";
   visibility: hidden;
-  grid-area: 1 / 1;
+  white-space: nowrap;
   font-style: italic;
 }
 .hero-hold-sizer em {
-  grid-area: 1 / 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
 }
 .pg-hero .pitch {
   display: grid;
