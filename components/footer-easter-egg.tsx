@@ -59,7 +59,7 @@ export function FooterEasterEgg() {
       </span>
       {showToast && (
         <div className="footer-toast">
-          You clicked 7 times. I respect the persistence — it&apos;s exactly what I ship to production.
+          You clicked 7 times. I respect the persistence. It&apos;s exactly what I ship to production.
         </div>
       )}
     </>
