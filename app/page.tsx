@@ -16,8 +16,9 @@ export default function Home() {
 
           <div className="pitch">
             <p className="lead">
-              I build Python backends, AI pipelines, and the infrastructure nobody notices
-              until it breaks. Mostly it doesn&apos;t. That&apos;s the point.
+              I build Python backends, AI pipelines, and infrastructure designed to stay
+              invisible. The things I ship tend to stay up. When they don&apos;t,
+              there&apos;s already a runbook for it.
             </p>
             <div className="meta">
               <div className="row"><span>Currently</span><b>Software Engineer @ Betsol</b></div>

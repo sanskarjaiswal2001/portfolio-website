@@ -123,7 +123,6 @@
 
   * { @apply border-border outline-ring/50; }
 
-  html { scroll-behavior: smooth; }
 
   body {
     margin: 0; padding: 0;
@@ -164,8 +163,8 @@
    ============================================================ */
 .reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .reveal.in {
   opacity: 1;
@@ -304,7 +303,7 @@
   .pg-hero .pitch { grid-template-columns: 1fr; gap: 40px; }
 }
 .pg-hero .lead {
-  font-size: clamp(20px, 2.2vw, 28px);
+  font-size: clamp(18px, 2.2vw, 28px);
   line-height: 1.35;
   color: var(--ink);
   letter-spacing: -0.015em;
@@ -328,10 +327,10 @@
    MARQUEE STRIP
    ============================================================ */
 .pg-marquee {
-  border-top: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
+  border-top: 1px solid color-mix(in oklab, var(--rule) 60%, transparent);
+  border-bottom: 1px solid color-mix(in oklab, var(--rule) 60%, transparent);
   overflow: hidden;
-  background: var(--paper-2);
+  background: color-mix(in oklab, var(--paper-2) 65%, transparent);
 }
 .pg-marquee .track {
   display: flex; gap: 64px;
@@ -339,6 +338,7 @@
   animation: ticker 38s linear infinite;
   white-space: nowrap;
   width: max-content;
+  will-change: transform;
 }
 .pg-marquee .item {
   display: inline-flex; align-items: center; gap: 14px;
@@ -359,7 +359,7 @@
 /* ============================================================
    SECTION SHARED
    ============================================================ */
-.pg-section { padding: calc(120px * var(--gap)) 0; }
+.pg-section { padding: calc(120px * var(--gap)) 0; contain: layout; }
 
 .pg-section-head {
   display: flex; justify-content: space-between; align-items: baseline;
@@ -411,10 +411,11 @@
   padding-top: 14px;
 }
 .pg-nowbox {
-  border: 1px solid var(--rule);
+  border: 1px solid color-mix(in oklab, var(--rule) 60%, transparent);
   border-radius: var(--pg-radius);
   padding: 22px;
-  background: var(--paper-2);
+  background: color-mix(in oklab, var(--paper-2) 85%, transparent);
+  box-shadow: 0 1px 3px oklch(0 0 0 / 0.06), inset 0 1px 0 oklch(1 0 0 / 0.06);
 }
 .pg-nowbox .title {
   font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
@@ -447,7 +448,7 @@
   transition: background 0.3s ease;
 }
 .pg-job:last-child { border-bottom: 1px solid var(--rule); }
-.pg-job:hover { background: var(--paper-2); }
+.pg-job:hover { background: color-mix(in oklab, var(--paper-2) 60%, transparent); }
 @media (max-width: 800px) {
   .pg-job { grid-template-columns: 1fr; gap: 16px; }
 }
@@ -497,7 +498,7 @@
   cursor: pointer;
 }
 .pg-project:last-child { border-bottom: 1px solid var(--rule); }
-.pg-project:hover { background: var(--paper-2); padding-left: 36px; }
+.pg-project:hover { background: color-mix(in oklab, var(--paper-2) 55%, transparent); padding-left: 36px; }
 .pg-project .num {
   font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
   font-size: 13px; color: var(--ink-3);
@@ -542,19 +543,24 @@
    ============================================================ */
 .pg-skills {
   display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 1px; background: var(--rule);
-  border: 1px solid var(--rule); border-radius: var(--pg-radius);
+  gap: 1px;
+  background: color-mix(in oklab, var(--rule) 50%, transparent);
+  border: 1px solid color-mix(in oklab, var(--rule) 60%, transparent);
+  border-radius: var(--pg-radius);
   overflow: hidden;
+  box-shadow: 0 2px 12px oklch(0 0 0 / 0.05);
 }
 @media (max-width: 800px) { .pg-skills { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 500px) { .pg-skills { grid-template-columns: 1fr; } }
 
 .pg-skills .cell {
-  background: var(--paper);
+  background: color-mix(in oklab, var(--paper) 80%, transparent);
   padding: 28px 24px;
   transition: background 0.25s ease;
 }
-.pg-skills .cell:hover { background: var(--paper-2); }
+.pg-skills .cell:hover {
+  background: color-mix(in oklab, var(--paper-2) 70%, transparent);
+}
 .pg-skills .cell .head {
   font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
   font-size: 11px; color: var(--ink-3);
@@ -686,13 +692,17 @@
 .pg-form input, .pg-form textarea {
   font-family: var(--font-inter-tight), system-ui, sans-serif;
   font-size: 16px; color: var(--ink);
-  background: transparent; border: none;
-  border-bottom: 1px solid var(--rule);
-  padding: 10px 0; outline: none;
-  transition: border-color 0.2s ease;
-  width: 100%;
+  background: color-mix(in oklab, var(--paper-2) 40%, transparent);
+  border: none;
+  border-bottom: 1px solid color-mix(in oklab, var(--rule) 70%, transparent);
+  padding: 10px 8px; outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  width: 100%; border-radius: 4px 4px 0 0;
 }
-.pg-form input:focus, .pg-form textarea:focus { border-color: var(--pg-accent); }
+.pg-form input:focus, .pg-form textarea:focus {
+  background: color-mix(in oklab, var(--pg-accent-soft) 60%, transparent);
+}
+.pg-form input:focus, .pg-form textarea:focus { border-color: var(--pg-accent); background: color-mix(in oklab, var(--pg-accent-soft) 60%, transparent); }
 .pg-form textarea { resize: vertical; min-height: 80px; }
 .pg-form button {
   align-self: flex-start;
@@ -732,3 +742,75 @@
   display: block;
 }
 .pg-footer .big:hover { color: var(--pg-accent); -webkit-text-stroke-color: var(--pg-accent); }
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+@media (max-width: 700px) {
+  /* Hero */
+  .pg-hero {
+    padding-top: 80px;
+    justify-content: flex-start;
+  }
+  .pg-hero h1 {
+    font-size: clamp(36px, 11vw, 60px);
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+  .pg-hero .pitch {
+    margin-top: 32px;
+    gap: 28px;
+  }
+  .pg-hero .lead {
+    font-size: clamp(17px, 4.5vw, 22px);
+  }
+  .pg-hero .meta { font-size: 12px; }
+  .pg-hero .meta .row { flex-direction: column; gap: 2px; padding-bottom: 8px; }
+  .pg-hero .meta .row b { font-size: 13px; }
+
+  /* Marquee */
+  .pg-marquee .track { gap: 40px; padding: 14px 0; }
+  .pg-marquee .item { font-size: 12px; }
+  .pg-marquee .item b { font-size: 15px; }
+
+  /* Sections */
+  .pg-section { padding: 72px 0; }
+  .pg-section-head { margin-bottom: 40px; flex-direction: column; gap: 6px; }
+  .pg-section-head h2 { font-size: clamp(28px, 8vw, 44px); }
+  .pg-section-head .right { display: none; }
+
+  /* Experience */
+  .pg-job { padding: 24px 0; gap: 10px; }
+  .pg-job .when { font-size: 11px; }
+  .pg-job .role { font-size: clamp(18px, 5.5vw, 24px); }
+  .pg-job ul { font-size: 14px; gap: 10px; }
+
+  /* Projects */
+  .pg-project { padding: 20px 12px; grid-template-columns: 40px 1fr 28px; gap: 10px; }
+  .pg-project:hover { padding-left: 20px; }
+  .pg-project .name { font-size: clamp(18px, 5vw, 22px); }
+  .pg-project .desc { grid-column: 2 / 3; font-size: 13px; }
+
+  /* Skills */
+  .pg-skills { grid-template-columns: 1fr 1fr; }
+  .pg-skills .cell { padding: 18px 16px; }
+
+  /* Blog */
+  .pg-post { padding: 20px 0; gap: 4px; }
+  .pg-post-title { font-size: clamp(15px, 4vw, 18px); }
+
+  /* Contact */
+  .pg-contact-wrap { gap: 36px; }
+  .pg-contact-wrap h3 { font-size: clamp(32px, 10vw, 56px); margin-bottom: 16px; }
+  .pg-contact-wrap p { font-size: 15px; }
+  .pg-links a { font-size: 15px; padding: 14px 4px; }
+
+  /* Nav CTA hidden on very small screens */
+  .pg-nav .cta { display: none; }
+
+  /* Footer */
+  .pg-footer { padding: 32px 0; margin-top: 48px; }
+  .pg-footer .big { font-size: clamp(48px, 18vw, 100px); margin-top: 24px; }
+}

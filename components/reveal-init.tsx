@@ -8,12 +8,16 @@ export function RevealInit() {
       (entries) => {
         entries.forEach((e) => {
           if (e.isIntersecting) {
-            e.target.classList.add("in")
-            io.unobserve(e.target)
+            const el = e.target as HTMLElement
+            el.style.willChange = "transform, opacity"
+            el.classList.add("in")
+            // Release GPU layer after animation completes
+            setTimeout(() => { el.style.willChange = "auto" }, 800)
+            io.unobserve(el)
           }
         })
       },
-      { threshold: 0.12, rootMargin: "0px 0px -60px 0px" }
+      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
     )
     document.querySelectorAll(".reveal").forEach((el) => io.observe(el))
     return () => io.disconnect()

@@ -3,100 +3,84 @@
 import { useEffect, useState, useRef, useCallback } from "react"
 
 const SCRAMBLE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%!&*?0123456789"
+const SYNC_INTERVAL = 3400
 
-const UNDER_PHRASES = [
-  "real load.",
-  "scale.",
-  "3am incidents.",
-  "production.",
-  "your SLA.",
-  "10M records.",
+// Curated states — every combination reads as a coherent sentence
+const STATES = [
+  { role: "Backend engineer.", hold: "hold up",  under: "real load."     },
+  { role: "AI engineer.",      hold: "scale",     under: "10M records."   },
+  { role: "Python engineer.",  hold: "survive",   under: "3am incidents." },
+  { role: "Backend engineer.", hold: "deliver",   under: "your SLA."      },
+  { role: "AI engineer.",      hold: "perform",   under: "production."    },
+  { role: "Python engineer.",  hold: "last",      under: "any load."      },
 ]
 
-const HOLDUP_PHRASES = [
-  "hold up",
-  "perform",
-  "survive",
-  "deliver",
-  "stick",
-  "last",
-]
+// Shared module-level index so all three fields change together
+let sharedIdx = 0
+type Listener = (idx: number) => void
+const listeners = new Set<Listener>()
+let timerStarted = false
 
-const ROLE_PHRASES = ["Backend engineer.", "AI engineer.", "Python engineer."]
+function startSharedTimer() {
+  if (timerStarted) return
+  timerStarted = true
+  setInterval(() => {
+    sharedIdx = (sharedIdx + 1) % STATES.length
+    listeners.forEach((fn) => fn(sharedIdx))
+  }, SYNC_INTERVAL)
+}
 
-function useScramble(phrases: string[], interval: number) {
-  const [display, setDisplay] = useState(phrases[0])
-  const idxRef = useRef(0)
+const SCRAMBLE_MS = 28
+const SCRAMBLE_STEPS = 18
+
+function useScrambleField(field: keyof (typeof STATES)[0]) {
+  const initial = STATES[0][field]
+  const [display, setDisplay] = useState(initial)
   const rafRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   const scrambleTo = useCallback((target: string) => {
     if (rafRef.current) clearInterval(rafRef.current)
-    const stepMs = 28
-    const lockPerStep = target.length / 18 // how many chars lock per step
+    const lockPerStep = target.length / SCRAMBLE_STEPS
     let lockedCount = 0
-
     rafRef.current = setInterval(() => {
       lockedCount = Math.min(lockedCount + lockPerStep, target.length)
       const locked = Math.floor(lockedCount)
       setDisplay(
-        target
-          .split("")
-          .map((ch, i) =>
-            i < locked
-              ? ch
-              : SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)]
-          )
-          .join("")
+        target.split("").map((ch, i) =>
+          i < locked ? ch : SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)]
+        ).join("")
       )
       if (locked >= target.length) {
         clearInterval(rafRef.current!)
         setDisplay(target)
       }
-    }, stepMs)
+    }, SCRAMBLE_MS)
   }, [])
 
   useEffect(() => {
-    const tick = setInterval(() => {
-      idxRef.current = (idxRef.current + 1) % phrases.length
-      scrambleTo(phrases[idxRef.current])
-    }, interval)
+    startSharedTimer()
+    const listener: Listener = (idx) => scrambleTo(STATES[idx][field])
+    listeners.add(listener)
     return () => {
-      clearInterval(tick)
+      listeners.delete(listener)
       if (rafRef.current) clearInterval(rafRef.current)
     }
-  }, [phrases, interval, scrambleTo])
+  }, [field, scrambleTo])
 
   return display
 }
 
 export function HeroRoleText() {
-  const display = useScramble(ROLE_PHRASES, 3000)
-  return (
-    <span style={{ display: "inline-block" }}>
-      {display}
-    </span>
-  )
+  const display = useScrambleField("role")
+  return <span style={{ display: "inline-block" }}>{display}</span>
 }
 
 export function HeroHoldUpText() {
-  const display = useScramble(HOLDUP_PHRASES, 3700)
-  return (
-    <em style={{ display: "inline-block", minWidth: "7ch" }}>
-      {display}
-    </em>
-  )
+  const display = useScrambleField("hold")
+  return <em>{display}</em>
 }
 
 export function HeroRotatingText() {
-  const display = useScramble(UNDER_PHRASES, 2600)
-  return (
-    <em
-      style={{
-        display: "inline-block",
-        minWidth: "14ch",
-      }}
-    >
-      {display}
-    </em>
-  )
+  const display = useScrambleField("under")
+  return <em style={{ display: "inline-block", minWidth: "13ch" }}>{display}</em>
 }
