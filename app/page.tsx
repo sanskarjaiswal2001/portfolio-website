@@ -10,7 +10,6 @@ export default function Home() {
         <div className="pg-container">
           <h1>
             <HeroRoleText />
-            <br />
             Ships things that <HeroHoldUpText /> under <HeroRotatingText />
           </h1>
 

@@ -72,14 +72,7 @@ function useScrambleField(field: keyof (typeof STATES)[0]) {
 
 export function HeroRoleText() {
   const display = useScrambleField("role")
-  return (
-    <span style={{ position: "relative", display: "inline-block", maxWidth: "100%" }}>
-      <span style={{ visibility: "hidden", userSelect: "none", pointerEvents: "none" }} aria-hidden="true">
-        Backend engineer.
-      </span>
-      <span style={{ position: "absolute", left: 0, top: 0 }}>{display}</span>
-    </span>
-  )
+  return <span className="hero-role-text">{display}</span>
 }
 
 export function HeroHoldUpText() {

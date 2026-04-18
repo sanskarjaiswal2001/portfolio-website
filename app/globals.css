@@ -295,6 +295,9 @@
   color: var(--pg-accent);
   letter-spacing: -0.02em;
 }
+.hero-role-text {
+  display: block;
+}
 .pg-hero .pitch {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -756,6 +759,7 @@
     overflow-wrap: break-word;
     word-break: break-word;
   }
+  .hero-role-text { min-height: 2em; }
   .pg-hero .pitch {
     margin-top: 32px;
     gap: 28px;
