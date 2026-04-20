@@ -370,13 +370,6 @@ export default function Home() {
                   </span>
                   <span className="arrow">↗</span>
                 </a>
-                <a href="/resume.pdf" download="Sanskar_Jaiswal_Resume.pdf">
-                  <span>
-                    <span className="pg-link-tag">RESUME</span>
-                    download .pdf
-                  </span>
-                  <span className="arrow">↓</span>
-                </a>
               </div>
             </div>
           </div>
