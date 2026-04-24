@@ -380,7 +380,7 @@ export default function Home() {
       <footer className="pg-footer">
         <div className="pg-container">
           <div className="row">
-            <div>© 2026 Sanskar Jaiswal · made with too much coffee</div>
+            <div>© 2026 Sanskar Jaiswal · fuelled on Monster Ultra</div>
             <div>v3 · last shipped apr 2026</div>
           </div>
           <FooterEasterEgg />
