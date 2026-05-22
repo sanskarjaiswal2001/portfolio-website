@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server"
 
+export const runtime = 'edge'
+
 const HASHNODE_GQL = "https://gql.hashnode.com"
 const BLOG_HOST = "blog.sanskarjaiswal.dev"
 
@@ -24,7 +26,6 @@ export async function GET() {
     const res = await fetch(HASHNODE_GQL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      next: { revalidate: 1800 },
       body: JSON.stringify({ query: QUERY }),
     })
 
