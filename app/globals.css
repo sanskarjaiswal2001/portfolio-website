@@ -806,6 +806,49 @@
 }
 .pg-footer .big:hover { color: var(--pg-accent); -webkit-text-stroke-color: var(--pg-accent); }
 
+/* Expanded footer blocks */
+.pg-footer .footer-links {
+  display: flex; align-items: center; gap: 8px;
+}
+.pg-footer .footer-links a {
+  color: var(--ink-3);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.pg-footer .footer-links a:hover {
+  color: var(--pg-accent);
+}
+.pg-footer .sep {
+  color: var(--rule);
+  font-size: 10px;
+}
+.pg-footer .footer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  font-size: 11px;
+  color: var(--ink-3);
+  line-height: 1.6;
+}
+.pg-footer .footer-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 200px;
+}
+.pg-footer .footer-tag {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-2);
+}
+
 /* ============================================================
    MOBILE
    ============================================================ */

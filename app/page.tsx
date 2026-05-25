@@ -1,6 +1,7 @@
 import { BlogFeed } from "@/components/blog-feed"
 import { HeroRotatingText, HeroRoleText, HeroHoldUpText } from "@/components/hero-rotating-text"
 import { FooterEasterEgg } from "@/components/footer-easter-egg"
+import { SiteFooter } from "@/components/site-footer"
 import { CopyEmail } from "@/components/copy-email"
 
 export default function Home() {
@@ -377,15 +378,10 @@ export default function Home() {
       </section>
 
       {/* ===================== FOOTER ===================== */}
-      <footer className="pg-footer">
-        <div className="pg-container">
-          <div className="row">
-            <div>© 2026 Sanskar Jaiswal · fuelled on Monster Ultra</div>
-            <div>v3 · last shipped apr 2026</div>
-          </div>
-          <FooterEasterEgg />
-        </div>
-      </footer>
+      <SiteFooter />
+      <div className="pg-container">
+        <FooterEasterEgg />
+      </div>
     </main>
   )
 }
