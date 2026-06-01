@@ -363,8 +363,7 @@ export default function Home() {
                 textDecoration: 'none',
                 transition: 'background .2s',
               }}
-              onMouseOver={e => (e.currentTarget.style.background = 'var(--pg-accent-soft)')}
-              onMouseOut={e => (e.currentTarget.style.background = 'transparent')}
+              className="vision-cta"
             >
               Explore the full setup ↗
             </a>

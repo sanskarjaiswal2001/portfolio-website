@@ -650,6 +650,7 @@
   line-height: 1.5;
   margin-top: 6px;
 }
+a.vision-cta:hover { background: var(--pg-accent-soft); }
 
 
 /* ============================================================
