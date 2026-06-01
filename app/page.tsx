@@ -400,7 +400,7 @@ export default function Home() {
         <div className="pg-container">
           <div className="pg-section-head reveal">
             <div>
-              <div className="label">05 / Contact</div>
+              <div className="label">06 / Contact</div>
               <h2>Say <em>hi.</em></h2>
             </div>
             <div className="right">/ get in touch</div>
