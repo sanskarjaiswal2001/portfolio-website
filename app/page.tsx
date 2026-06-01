@@ -299,12 +299,85 @@ export default function Home() {
         </div>
       </section>
 
-{/* ===================== BLOG ===================== */}
+      {/* ===================== VISION ===================== */}
+      <section id="vision" className="pg-section">
+        <div className="pg-container">
+          <div className="pg-section-head reveal">
+            <div>
+              <div className="label">04 / Vision</div>
+              <h2>The homelab <em>won&apos;t manage itself.</em></h2>
+            </div>
+            <div className="right">/ autonomous infra</div>
+          </div>
+
+          <div className="pg-vision-grid">
+            <div className="pg-vision-card reveal">
+              <span className="icon">🐳</span>
+              <span className="num">40+</span>
+              <span className="lbl">Docker Containers</span>
+              <p>Media stack, home automation, AI services, databases — all containerized with health checks. Caddy routes 15+ internal domains.</p>
+            </div>
+            <div className="pg-vision-card reveal">
+              <span className="icon">🧠</span>
+              <span className="num">4</span>
+              <span className="lbl">AI Subagents</span>
+              <p>Sysadmin, Searcher, Writer, Architect — each with its own identity, memory, and toolset. They rotate watch so nothing drifts.</p>
+            </div>
+            <div className="pg-vision-card reveal">
+              <span className="icon">📚</span>
+              <span className="num">5</span>
+              <span className="lbl">Research Papers</span>
+              <p>RAG, Knowledge Graphs, MCP, Alignment Faking, Descartes → GoL → AI Memory. All hosted at <em>vision.sanskarjaiswal.dev/research/</em>.</p>
+            </div>
+            <div className="pg-vision-card reveal">
+              <span className="icon">⚡</span>
+              <span className="num">1s</span>
+              <span className="lbl">Deploy Pipeline</span>
+              <p><code>make deploy</code> → rsync + build + wrangler → Cloudflare Pages. Sub-second static deploys with automatic edge cache busting.</p>
+            </div>
+            <div className="pg-vision-card reveal">
+              <span className="icon">🔐</span>
+              <span className="num">100%</span>
+              <span className="lbl">Self-Hosted</span>
+              <p>AdGuard Home, Vaultwarden, Paperless-ngx, Immich, Honcho memory, Jellyfin. Zero third-party cloud dependencies for core services.</p>
+            </div>
+            <div className="pg-vision-card reveal">
+              <span className="icon">💾</span>
+              <span className="num">3.6TB</span>
+              <span className="lbl">Total Storage</span>
+              <p>Media library, photo archive, document OCR, database dumps, and server snapshots across internal NVMe and external drives.</p>
+            </div>
+          </div>
+
+          <div className="reveal" style={{ marginTop: 32, textAlign: 'center' as const }}>
+            <a
+              href="https://vision.sanskarjaiswal.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: 8,
+                padding: '12px 24px', borderRadius: 10,
+                border: '1px solid var(--pg-accent)',
+                color: 'var(--pg-accent)',
+                fontSize: 14, fontWeight: 600,
+                textDecoration: 'none',
+                transition: 'background .2s',
+              }}
+              onMouseOver={e => (e.currentTarget.style.background = 'var(--pg-accent-soft)')}
+              onMouseOut={e => (e.currentTarget.style.background = 'transparent')}
+            >
+              Explore the full setup ↗
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ===================== BLOG ===================== */}
       <section id="writing" className="pg-section">
         <div className="pg-container">
           <div className="pg-section-head reveal">
             <div>
-              <div className="label">04 / Writing</div>
+              <div className="label">05 / Writing</div>
               <h2>Notes from the <em>terminal.</em></h2>
             </div>
             <div className="right">

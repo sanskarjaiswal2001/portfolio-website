@@ -606,6 +606,53 @@
 
 
 /* ============================================================
+   VISION — Homelab showcase
+   ============================================================ */
+.pg-vision-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 600px) {
+  .pg-vision-grid { grid-template-columns: 1fr; }
+}
+.pg-vision-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 24px;
+  border: 1px solid var(--rule);
+  border-radius: var(--pg-radius);
+  transition: border-color .2s, box-shadow .2s;
+}
+.pg-vision-card:hover {
+  border-color: var(--pg-accent);
+  box-shadow: 0 0 0 1px var(--pg-accent-soft);
+}
+.pg-vision-card .icon { font-size: 1.4rem; line-height: 1; margin-bottom: 4px; }
+.pg-vision-card .num {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--pg-accent);
+}
+.pg-vision-card .lbl {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+}
+.pg-vision-card p {
+  font-size: 13px;
+  color: var(--ink-2);
+  line-height: 1.5;
+  margin-top: 6px;
+}
+
+
+/* ============================================================
    STACK STRIP
    ============================================================ */
 .pg-section--flush { padding-top: 0; }
