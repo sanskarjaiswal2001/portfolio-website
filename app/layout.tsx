@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter_Tight, JetBrains_Mono, Instrument_Serif } from "next/font/google"
+import { Inter_Tight, JetBrains_Mono, Instrument_Serif, Space_Grotesk } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Suspense } from "react"
@@ -28,6 +28,13 @@ const instrumentSerif = Instrument_Serif({
   weight: ["400"],
   style: ["normal", "italic"],
   variable: "--font-instrument-serif",
+  display: "swap",
+})
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-space-grotesk",
   display: "swap",
 })
 
@@ -66,7 +73,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`dark ${interTight.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable}`}
+      className={`dark ${interTight.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable} ${spaceGrotesk.variable}`}
       suppressHydrationWarning
     >
       <head>
