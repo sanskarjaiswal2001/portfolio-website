@@ -68,10 +68,10 @@ export default function Home() {
         <div className="pg-container">
           <div className="pg-section-head reveal">
             <div>
-              <div className="label">01 / About</div>
+              <div className="label">runbook / about</div>
               <h2>The <em>short</em> version.</h2>
             </div>
-            <div className="right">/ who, where, what</div>
+            <div className="right">who, where, what</div>
           </div>
 
           <div className="pg-about-grid">
@@ -87,7 +87,7 @@ export default function Home() {
                 <ul>
                   <li>
                     <span className="k">building</span>
-                    <span>AIgis v2, agentic homelab framework, multi-node support</span>
+                    <span>Hermes ops layer, agentic homelab framework, multi-node support</span>
                   </li>
                   <li>
                     <span className="k">reading</span>
@@ -113,10 +113,10 @@ export default function Home() {
         <div className="pg-container">
           <div className="pg-section-head reveal">
             <div>
-              <div className="label">02 / Work</div>
+              <div className="label">production / work</div>
               <h2>Where the <em>numbers</em> come from.</h2>
             </div>
-            <div className="right">/ 2.6 yrs · Betsol · 2 roles</div>
+            <div className="right">2.6 yrs · Betsol · 2 roles</div>
           </div>
 
           <div className="pg-exp">
@@ -130,9 +130,9 @@ export default function Home() {
                 <div className="where">Betsol · Bangalore</div>
                 <ul>
                   <li>
-                    Designed a <b>RAG pipeline</b> over <span className="num">3M+ records</span> using
-                    FastAPI, Azure OpenAI and FastMCP. Support escalations dropped
-                    <span className="num"> 40%</span>; average ticket time went from 48h to 29h.
+                    Designed a <b>RAG pipeline</b> over <span className="num">3M+ records</span>{" "}
+                    using FastAPI, Azure OpenAI and FastMCP. Support escalations dropped{" "}
+                    <span className="num">40%</span>; average ticket time went from 48h to 29h.
                   </li>
                   <li>
                     Built uptime monitoring across <span className="num">100+ client sites</span> with
@@ -170,13 +170,13 @@ export default function Home() {
                     <span className="num">$1M+/year.</span>
                   </li>
                   <li>
-                    Wrote <span className="num">50+ automation workflows</span> for finance
-                    operations: <span className="num">90% less manual work,</span> roughly{" "}
-                    <span className="num">600 engineer-hours/year</span> freed up.
+                    Wrote <span className="num">50+ automation workflows</span>
+                    {" for finance operations: "}<span className="num">90% less manual work,</span> roughly
+                    <span className="num"> 600 engineer-hours/year</span> freed up.
                   </li>
                   <li>
-                    Automated audit reconciliation over <span className="num">10M+ financial records.</span>{" "}
-                    Review cycle: 5 days → 1.
+                    Automated audit reconciliation over <span className="num">10M+ financial records.</span>
+                    {" Review cycle: 5 days → 1."}
                   </li>
                   <li>
                     Rebuilt flaky REST integrations with retry and fallback logic. Nightly
@@ -208,29 +208,30 @@ export default function Home() {
         <div className="pg-container">
           <div className="pg-section-head reveal">
             <div>
-              <div className="label">03 / Projects</div>
-              <h2>Things I built <em>for fun.</em></h2>
+              <div className="label">systems / projects</div>
+              <h2>Systems I built <em>off-hours.</em></h2>
             </div>
-            <div className="right">/ side quests</div>
+            <div className="right">homelab, agents, infra, on-chain scars</div>
           </div>
 
           <div className="pg-projects">
             <a
-              className="pg-project reveal"
-              href="https://github.com/sanskarjaiswal2001/guardian-modified"
+              className="pg-project pg-project--feature reveal"
+              href="https://vision.sanskarjaiswal.dev/homelab/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <div className="num">/01</div>
+              <div className="kind">ops</div>
               <div>
-                <div className="name">Guardian Modified</div>
+                <div className="name">Hermes Homelab Ops</div>
                 <div className="desc">
-                  Token-based access control for GTA V peer-to-peer sessions. Firebase auth,
-                  GCP-deployable, 1K+ active users. None of whom read the docs.
+                  A live agentic ops layer for the home lab: subagents with roles, persistent memory,
+                  tool-scoped permissions, deployment notes, research traces, and production services
+                  wired behind real monitoring instead of a demo script.
                 </div>
               </div>
               <div className="stack">
-                <span>Python</span><span>Firebase</span><span>GCP</span>
+                <span>Hermes</span><span>Home Assistant</span><span>Cloudflare</span><span>Docker</span>
               </div>
               <div className="arrow">↗</div>
             </a>
@@ -241,7 +242,7 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <div className="num">/02</div>
+              <div className="kind">infra</div>
               <div>
                 <div className="name">AIgis</div>
                 <div className="desc">
@@ -258,11 +259,31 @@ export default function Home() {
 
             <a
               className="pg-project reveal"
+              href="https://github.com/sanskarjaiswal2001/guardian-modified"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div className="kind">access</div>
+              <div>
+                <div className="name">Guardian Modified</div>
+                <div className="desc">
+                  Token-based access control for GTA V peer-to-peer sessions. Firebase auth,
+                  GCP-deployable, 1K+ active users. None of whom read the docs.
+                </div>
+              </div>
+              <div className="stack">
+                <span>Python</span><span>Firebase</span><span>GCP</span>
+              </div>
+              <div className="arrow">↗</div>
+            </a>
+
+            <a
+              className="pg-project reveal"
               href="https://github.com/sanskarjaiswal2001/Ethgram"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <div className="num">/03</div>
+              <div className="kind">ipfs</div>
               <div>
                 <div className="name">Ethgram</div>
                 <div className="desc">
@@ -282,7 +303,7 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <div className="num">/04</div>
+              <div className="kind">dao</div>
               <div>
                 <div className="name">DAO Voting</div>
                 <div className="desc">
@@ -299,84 +320,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===================== VISION ===================== */}
-      <section id="vision" className="pg-section">
-        <div className="pg-container">
-          <div className="pg-section-head reveal">
-            <div>
-              <div className="label">04 / Vision</div>
-              <h2>The homelab <em>won&apos;t manage itself.</em></h2>
-            </div>
-            <div className="right">/ autonomous infra</div>
-          </div>
-
-          <div className="pg-vision-grid">
-            <div className="pg-vision-card reveal">
-              <span className="icon">🐳</span>
-              <span className="num">40+</span>
-              <span className="lbl">Docker Containers</span>
-              <p>Media stack, home automation, AI services, databases — all containerized with health checks. Caddy routes 15+ internal domains.</p>
-            </div>
-            <div className="pg-vision-card reveal">
-              <span className="icon">🧠</span>
-              <span className="num">4</span>
-              <span className="lbl">AI Subagents</span>
-              <p>Sysadmin, Searcher, Writer, Architect — each with its own identity, memory, and toolset. They rotate watch so nothing drifts.</p>
-            </div>
-            <div className="pg-vision-card reveal">
-              <span className="icon">📚</span>
-              <span className="num">5</span>
-              <span className="lbl">Research Papers</span>
-              <p>RAG, Knowledge Graphs, MCP, Alignment Faking, Descartes → GoL → AI Memory. All hosted at <em>vision.sanskarjaiswal.dev/research/</em>.</p>
-            </div>
-            <div className="pg-vision-card reveal">
-              <span className="icon">⚡</span>
-              <span className="num">1s</span>
-              <span className="lbl">Deploy Pipeline</span>
-              <p><code>make deploy</code> → rsync + build + wrangler → Cloudflare Pages. Sub-second static deploys with automatic edge cache busting.</p>
-            </div>
-            <div className="pg-vision-card reveal">
-              <span className="icon">🔐</span>
-              <span className="num">100%</span>
-              <span className="lbl">Self-Hosted</span>
-              <p>AdGuard Home, Vaultwarden, Paperless-ngx, Immich, Honcho memory, Jellyfin. Zero third-party cloud dependencies for core services.</p>
-            </div>
-            <div className="pg-vision-card reveal">
-              <span className="icon">💾</span>
-              <span className="num">3.6TB</span>
-              <span className="lbl">Total Storage</span>
-              <p>Media library, photo archive, document OCR, database dumps, and server snapshots across internal NVMe and external drives.</p>
-            </div>
-          </div>
-
-          <div className="reveal" style={{ marginTop: 32, textAlign: 'center' as const }}>
-            <a
-              href="https://vision.sanskarjaiswal.dev"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: 8,
-                padding: '12px 24px', borderRadius: 10,
-                border: '1px solid var(--pg-accent)',
-                color: 'var(--pg-accent)',
-                fontSize: 14, fontWeight: 600,
-                textDecoration: 'none',
-                transition: 'background .2s',
-              }}
-              className="vision-cta"
-            >
-              Explore the full setup ↗
-            </a>
-          </div>
-        </div>
-      </section>
-
       {/* ===================== BLOG ===================== */}
       <section id="writing" className="pg-section">
         <div className="pg-container">
           <div className="pg-section-head reveal">
             <div>
-              <div className="label">05 / Writing</div>
+              <div className="label">notes / writing</div>
               <h2>Notes from the <em>terminal.</em></h2>
             </div>
             <div className="right">
@@ -400,10 +349,10 @@ export default function Home() {
         <div className="pg-container">
           <div className="pg-section-head reveal">
             <div>
-              <div className="label">06 / Contact</div>
+              <div className="label">handoff / contact</div>
               <h2>Say <em>hi.</em></h2>
             </div>
-            <div className="right">/ get in touch</div>
+            <div className="right">get in touch</div>
           </div>
 
           <div className="pg-contact-wrap">
@@ -424,21 +373,21 @@ export default function Home() {
                 <CopyEmail />
                 <a href="https://linkedin.com/in/sanskarjaiswal" target="_blank" rel="noopener noreferrer">
                   <span>
-                    <span className="pg-link-tag">LINKEDIN</span>
+                    <span className="pg-link-tag">LINKEDIN</span>{" "}
                     /in/sanskarjaiswal
                   </span>
                   <span className="arrow">↗</span>
                 </a>
                 <a href="https://github.com/sanskarjaiswal2001" target="_blank" rel="noopener noreferrer">
                   <span>
-                    <span className="pg-link-tag">GITHUB</span>
+                    <span className="pg-link-tag">GITHUB</span>{" "}
                     @sanskarjaiswal2001
                   </span>
                   <span className="arrow">↗</span>
                 </a>
                 <a href="https://blog.sanskarjaiswal.dev" target="_blank" rel="noopener noreferrer">
                   <span>
-                    <span className="pg-link-tag">BLOG</span>
+                    <span className="pg-link-tag">BLOG</span>{" "}
                     blog.sanskarjaiswal.dev
                   </span>
                   <span className="arrow">↗</span>

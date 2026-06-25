@@ -6,7 +6,7 @@ import confetti from "canvas-confetti"
 const CLICKS_NEEDED = 7
 
 export function FooterEasterEgg() {
-  const [count, setCount] = useState(0)
+  const [, setCount] = useState(0)
   const [pulsing, setPulsing] = useState(false)
   const [showToast, setShowToast] = useState(false)
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
