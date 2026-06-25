@@ -55,7 +55,7 @@
   --paper-2:     oklch(0.21  0.008 80);
   --ink:         oklch(0.96  0.005 85);
   --ink-2:       oklch(0.78  0.006 80);
-  --ink-3:       oklch(0.55  0.006 80);
+  --ink-3:       oklch(0.64  0.006 80);
   --rule:        oklch(0.32  0.008 80);
 
   --background:            oklch(0.16  0.008 80);
@@ -437,7 +437,7 @@
 .pg-section-head .label {
   font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
   font-size: 12px; color: var(--ink-3);
-  text-transform: uppercase; letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
 }
 .pg-section-head h2 {
   font-size: clamp(34px, 5vw, 56px);
@@ -566,9 +566,19 @@
 }
 .pg-project:last-child { border-bottom: 1px solid var(--rule); }
 .pg-project:hover { background: color-mix(in oklab, var(--paper-2) 55%, transparent); padding-left: 36px; }
-.pg-project .num {
+.pg-project .kind {
   font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
   font-size: 13px; color: var(--ink-3);
+  text-transform: lowercase;
+}
+.pg-project--feature {
+  background:
+    linear-gradient(90deg, var(--pg-accent-soft), transparent 42%),
+    color-mix(in oklab, var(--paper-2) 28%, transparent);
+}
+.pg-project--feature .kind,
+.pg-project--feature .name {
+  color: var(--ink);
 }
 .pg-project .name {
   font-size: clamp(22px, 2.4vw, 28px);
@@ -597,60 +607,13 @@
   max-height: 0; overflow: hidden; opacity: 0;
   transition: max-height 0.4s ease, opacity 0.3s ease, margin 0.3s ease;
 }
-.pg-project:hover .desc { max-height: 200px; opacity: 1; margin-top: 4px; }
+.pg-project:hover .desc,
+.pg-project:focus-visible .desc { max-height: 220px; opacity: 1; margin-top: 4px; }
 @media (max-width: 800px) {
   .pg-project { grid-template-columns: 50px 1fr 30px; gap: 14px; }
   .pg-project .stack { grid-column: 2 / 3; }
   .pg-project .desc { grid-column: 2 / 3; }
 }
-
-
-/* ============================================================
-   VISION — Homelab showcase
-   ============================================================ */
-.pg-vision-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-@media (max-width: 600px) {
-  .pg-vision-grid { grid-template-columns: 1fr; }
-}
-.pg-vision-card {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 24px;
-  border: 1px solid var(--rule);
-  border-radius: var(--pg-radius);
-  transition: border-color .2s, box-shadow .2s;
-}
-.pg-vision-card:hover {
-  border-color: var(--pg-accent);
-  box-shadow: 0 0 0 1px var(--pg-accent-soft);
-}
-.pg-vision-card .icon { font-size: 1.4rem; line-height: 1; margin-bottom: 4px; }
-.pg-vision-card .num {
-  font-size: 1.5rem;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1;
-  color: var(--pg-accent);
-}
-.pg-vision-card .lbl {
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--ink-3);
-}
-.pg-vision-card p {
-  font-size: 13px;
-  color: var(--ink-2);
-  line-height: 1.5;
-  margin-top: 6px;
-}
-a.vision-cta:hover { background: var(--pg-accent-soft); }
 
 
 /* ============================================================
@@ -945,7 +908,7 @@ a.vision-cta:hover { background: var(--pg-accent-soft); }
   .pg-project { padding: 20px 12px; grid-template-columns: 40px 1fr 28px; gap: 10px; }
   .pg-project:hover { padding-left: 20px; }
   .pg-project .name { font-size: clamp(18px, 5vw, 22px); }
-  .pg-project .desc { grid-column: 2 / 3; font-size: 13px; }
+  .pg-project .desc { grid-column: 2 / 3; font-size: 13px; max-height: none; opacity: 1; margin-top: 4px; }
 
 
   /* Blog */
@@ -958,8 +921,8 @@ a.vision-cta:hover { background: var(--pg-accent-soft); }
   .pg-contact-wrap p { font-size: 15px; }
   .pg-links a { font-size: 15px; padding: 14px 4px; }
 
-  /* Nav CTA hidden on very small screens */
-  .pg-nav .cta { display: none; }
+  .pg-nav .cta { padding: 7px 10px; font-size: 12px; }
+  .pg-nav .brand { font-size: 14px; gap: 8px; }
 
   /* Footer */
   .pg-footer { padding: 32px 0; margin-top: 48px; overflow: hidden; }

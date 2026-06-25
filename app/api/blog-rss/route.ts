@@ -5,6 +5,13 @@ export const runtime = 'edge'
 const HASHNODE_GQL = "https://gql.hashnode.com"
 const BLOG_HOST = "blog.sanskarjaiswal.dev"
 
+const FALLBACK_POSTS = [
+  { title: "A Tiny Crew of Agents Running My Homelab", date: "2026-04-17", link: "https://blog.sanskarjaiswal.dev/a-tiny-crew-of-agents-running-my-homelab" },
+  { title: "Building a Clean DNS Stack at Home", date: "2025-12-01", link: "https://blog.sanskarjaiswal.dev/building-a-clean-dns-stack-at-home" },
+  { title: "Running LLMs Locally: Why It's Important and How to Do It", date: "2025-09-15", link: "https://blog.sanskarjaiswal.dev/running-llms-locally-why-its-important-and-how-to-do-it" },
+  { title: "My Engineering Operating Manual — Patterns, Rituals, and Receipts", date: "2025-09-04", link: "https://blog.sanskarjaiswal.dev/my-engineering-operating-manual-patterns-rituals-and-receipts" },
+]
+
 const QUERY = `{
   publication(host: "${BLOG_HOST}") {
     posts(first: 4) {
@@ -47,6 +54,8 @@ export async function GET() {
       headers: { "Cache-Control": "public, s-maxage=1800, stale-while-revalidate=3600" },
     })
   } catch {
-    return NextResponse.json({ error: "unavailable" }, { status: 503 })
+    return NextResponse.json(FALLBACK_POSTS, {
+      headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=1800" },
+    })
   }
 }

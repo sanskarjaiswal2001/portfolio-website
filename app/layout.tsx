@@ -77,8 +77,8 @@ export default function RootLayout({
         <Navigation />
         <RevealInit />
         <Suspense fallback={null}>{children}</Suspense>
-        {process.env.NODE_ENV === "production" && <Analytics />}
-        {process.env.NODE_ENV === "production" && <SpeedInsights />}
+        {process.env.NODE_ENV === "production" && process.env.VERCEL === "1" && <Analytics />}
+        {process.env.NODE_ENV === "production" && process.env.VERCEL === "1" && <SpeedInsights />}
       </body>
     </html>
   )
