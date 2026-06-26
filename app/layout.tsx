@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter_Tight, JetBrains_Mono, Instrument_Serif } from "next/font/google"
+import { Azeret_Mono, Chivo } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Suspense } from "react"
@@ -9,25 +9,17 @@ import { RevealInit } from "@/components/reveal-init"
 import { ErrorFilter } from "@/components/error-filter"
 import "./globals.css"
 
-const interTight = Inter_Tight({
+const chivo = Chivo({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
-  variable: "--font-inter-tight",
+  variable: "--font-chivo",
   display: "swap",
 })
 
-const jetbrainsMono = JetBrains_Mono({
+const azeretMono = Azeret_Mono({
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
-  variable: "--font-jetbrains-mono",
-  display: "swap",
-})
-
-const instrumentSerif = Instrument_Serif({
-  subsets: ["latin"],
-  weight: ["400"],
-  style: ["normal", "italic"],
-  variable: "--font-instrument-serif",
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-azeret-mono",
   display: "swap",
 })
 
@@ -66,7 +58,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`dark ${interTight.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable}`}
+      className={`dark ${chivo.variable} ${azeretMono.variable}`}
       suppressHydrationWarning
     >
       <head>

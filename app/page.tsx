@@ -68,7 +68,7 @@ export default function Home() {
         <div className="pg-container">
           <div className="pg-section-head reveal">
             <div>
-              <div className="label">runbook / about</div>
+              <div className="label">scope: about</div>
               <h2>The <em>short</em> version.</h2>
             </div>
             <div className="right">who, where, what</div>
@@ -113,7 +113,7 @@ export default function Home() {
         <div className="pg-container">
           <div className="pg-section-head reveal">
             <div>
-              <div className="label">production / work</div>
+              <div className="label">scope: work</div>
               <h2>Where the <em>numbers</em> come from.</h2>
             </div>
             <div className="right">2.6 yrs · Betsol · 2 roles</div>
@@ -208,7 +208,7 @@ export default function Home() {
         <div className="pg-container">
           <div className="pg-section-head reveal">
             <div>
-              <div className="label">systems / projects</div>
+              <div className="label">scope: systems</div>
               <h2>Systems I built <em>off-hours.</em></h2>
             </div>
             <div className="right">homelab, agents, infra, on-chain scars</div>
@@ -346,7 +346,7 @@ export default function Home() {
         <div className="pg-container">
           <div className="pg-section-head reveal">
             <div>
-              <div className="label">notes / writing</div>
+              <div className="label">scope: notes</div>
               <h2>Notes from the <em>terminal.</em></h2>
             </div>
             <div className="right">
@@ -370,7 +370,7 @@ export default function Home() {
         <div className="pg-container">
           <div className="pg-section-head reveal">
             <div>
-              <div className="label">handoff / contact</div>
+              <div className="label">scope: handoff</div>
               <h2>Say <em>hi.</em></h2>
             </div>
             <div className="right">get in touch</div>
