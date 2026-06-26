@@ -46,19 +46,6 @@ export default function Home() {
             <span className="item star">✦</span>
             <span className="item"><b>10M+</b> records reconciled</span>
             <span className="item star">✦</span>
-            {/* duplicated for seamless loop */}
-            <span className="item"><b>3M+</b> records in production RAG</span>
-            <span className="item star">✦</span>
-            <span className="item"><b>$1M+/yr</b> saved on RPA licenses</span>
-            <span className="item star">✦</span>
-            <span className="item"><b>40%</b> fewer support escalations</span>
-            <span className="item star">✦</span>
-            <span className="item"><b>80%</b> less unplanned downtime</span>
-            <span className="item star">✦</span>
-            <span className="item"><b>100+</b> client sites monitored</span>
-            <span className="item star">✦</span>
-            <span className="item"><b>10M+</b> records reconciled</span>
-            <span className="item star">✦</span>
           </div>
         </div>
       </header>

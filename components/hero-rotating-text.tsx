@@ -1,10 +1,8 @@
 "use client"
 
-import { useEffect, useState, useRef, useCallback } from "react"
+import { useEffect, useState, useCallback } from "react"
 
-const SCRAMBLE_UPPER = "ABCDEFGHIJKLNOPRSTUVXYZ0123456789"
-const SCRAMBLE_LOWER = "abcdefghijklnorstuvxyz0123456789"
-const SYNC_INTERVAL = 3400
+const SYNC_INTERVAL = 4200
 
 // Curated states — every combination reads as a coherent sentence
 // [hold]+[under] char counts: 17, 15, 18, 16, 18, 16 — within 3 chars, stable wrapping
@@ -32,46 +30,22 @@ function startSharedTimer() {
   }, SYNC_INTERVAL)
 }
 
-const SCRAMBLE_MS = 28
-const SCRAMBLE_STEPS = 18
-
 function useScrambleField(field: keyof (typeof STATES)[0]) {
   const initial = STATES[0][field]
   const [display, setDisplay] = useState(initial)
-  const rafRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
-  const scrambleTo = useCallback((target: string) => {
-    if (rafRef.current) clearInterval(rafRef.current)
-    const lockPerStep = target.length / SCRAMBLE_STEPS
-    let lockedCount = 0
-    rafRef.current = setInterval(() => {
-      lockedCount = Math.min(lockedCount + lockPerStep, target.length)
-      const locked = Math.floor(lockedCount)
-      setDisplay(
-        target.split("").map((ch, i) =>
-          i < locked ? ch : /[A-Z]/.test(ch)
-            ? SCRAMBLE_UPPER[Math.floor(Math.random() * SCRAMBLE_UPPER.length)]
-            : /[a-z]/.test(ch)
-            ? SCRAMBLE_LOWER[Math.floor(Math.random() * SCRAMBLE_LOWER.length)]
-            : ch
-        ).join("")
-      )
-      if (locked >= target.length) {
-        clearInterval(rafRef.current!)
-        setDisplay(target)
-      }
-    }, SCRAMBLE_MS)
+  const setReadableState = useCallback((target: string) => {
+    setDisplay(target)
   }, [])
 
   useEffect(() => {
     startSharedTimer()
-    const listener: Listener = (idx) => scrambleTo(STATES[idx][field])
+    const listener: Listener = (idx) => setReadableState(STATES[idx][field])
     listeners.add(listener)
     return () => {
       listeners.delete(listener)
-      if (rafRef.current) clearInterval(rafRef.current)
     }
-  }, [field, scrambleTo])
+  }, [field, setReadableState])
 
   return display
 }

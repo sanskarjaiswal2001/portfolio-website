@@ -421,12 +421,10 @@
 .pg-marquee--hero { margin-top: 80px; }
 @media (max-width: 700px) { .pg-marquee--hero { margin-top: 40px; } }
 .pg-marquee .track {
-  display: flex; gap: 64px;
-  padding: 18px 0;
-  animation: ticker 38s linear infinite;
-  white-space: nowrap;
-  width: max-content;
-  will-change: transform;
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 18px 48px;
+  padding: 18px 32px;
+  white-space: normal;
+  width: auto;
 }
 .pg-marquee .item {
   display: inline-flex; align-items: center; gap: 14px;
