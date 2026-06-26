@@ -217,6 +217,27 @@ export default function Home() {
           <div className="pg-projects">
             <a
               className="pg-project pg-project--feature reveal"
+              href="https://github.com/NVIDIA/OpenShell"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div className="kind">agents</div>
+              <div>
+                <div className="name">ShellForge</div>
+                <div className="desc">
+                  Enterprise control plane concept for NVIDIA OpenShell: turns the alpha,
+                  single-developer secure agent runtime into a client-deployable layer with
+                  multi-tenancy, SSO/RBAC, centralized audit, secrets isolation, and Helm-based rollout.
+                </div>
+              </div>
+              <div className="stack">
+                <span>OpenShell</span><span>FastAPI</span><span>Postgres</span><span>OIDC</span>
+              </div>
+              <div className="arrow">↗</div>
+            </a>
+
+            <a
+              className="pg-project reveal"
               href="https://vision.sanskarjaiswal.dev/homelab/"
               target="_blank"
               rel="noopener noreferrer"
